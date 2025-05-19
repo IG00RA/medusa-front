@@ -7,11 +7,13 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import Thumbnail from "@modules/products/components/thumbnail"
 import { convertToLocale } from "@lib/util/money"
 import DeleteButton from "@modules/common/components/delete-button"
+import { updateLineItem } from "@lib/data/cart"
 import { useTranslations } from "@/lib/localization"
 import { PrimaryButton, SecondaryButton } from "../buttons"
 
 export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
   const [menu, setMenu] = useState(false)
+  const [updating, setUpdating] = useState<string | null>(null)
   const cartRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const t = useTranslations().header.cart
@@ -29,6 +31,22 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
   const totalItems =
     cart?.items?.reduce((acc, item) => acc + item.quantity, 0) || 0
   const subtotal = cart?.subtotal ?? 0
+
+  const handleQuantityChange = async (itemId: string, quantity: number) => {
+    if (quantity < 1 || !cart?.id) return
+    setUpdating(itemId)
+    try {
+      await updateLineItem({
+        lineId: itemId,
+        quantity,
+      })
+      router.refresh()
+    } catch (error) {
+      console.error("Error updating quantity:", error)
+    } finally {
+      setUpdating(null)
+    }
+  }
 
   const handleCheckout = () => {
     router.push("/cart")
@@ -90,16 +108,15 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
                       <DeleteButton
                         id={item.id}
                         className="inline-flex self-end items-center justify-center border border-neutral-300 rounded-full w-6 h-6 hover:bg-neutral-100 transition"
-                      >
-                        <span className="text-[#E0E0E0]">×</span>
-                      </DeleteButton>
+                        onSuccess={() => router.refresh()}
+                      ></DeleteButton>
                       <div className="flex items-center gap-1 mt-1 justify-end">
                         <button
-                          onClick={() => {
-                            // Medusa handles quantity updates via API, not context
-                            // You may need to add an updateQuantity function
-                          }}
-                          className="w-8 h-8 flex items-center justify-center rounded-full border border-main-blue bg-white hover:bg-neutral-100 transition"
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity - 1)
+                          }
+                          disabled={updating === item.id}
+                          className="w-8 h-8 flex items-center justify-center rounded-full border border-main-blue bg-white hover:bg-neutral-100 transition disabled:opacity-50"
                         >
                           <span className="text-xl leading-none text-main-blue">
                             −
@@ -109,14 +126,21 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
                           type="number"
                           min={1}
                           value={item.quantity}
-                          readOnly // Medusa updates quantities via API
-                          className="w-12 h-8 text-center border border-main-blue rounded-md text-main-blue"
+                          onChange={(e) =>
+                            handleQuantityChange(
+                              item.id,
+                              parseInt(e.target.value) || 1
+                            )
+                          }
+                          className="w-12 h-8 text-center border border-main-blue rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-main-blue"
+                          disabled={updating === item.id}
                         />
                         <button
-                          onClick={() => {
-                            // Add updateQuantity logic
-                          }}
-                          className="w-8 h-8 flex items-center justify-center rounded-full border border-main-blue bg-white hover:bg-neutral-100 transition"
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity + 1)
+                          }
+                          disabled={updating === item.id}
+                          className="w-8 h-8 flex items-center justify-center rounded-full border border-main-blue bg-white hover:bg-neutral-100 transition disabled:opacity-50"
                         >
                           <span className="text-xl leading-none text-main-blue">
                             +
