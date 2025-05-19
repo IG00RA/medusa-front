@@ -1,0 +1,499 @@
+{
+  "header": {
+    "navigation": {
+      "development": "Zestawy edukacyjne",
+      "games": "Zestawy do gier",
+      "accessories": "Akcesoria",
+      "decorations": "Dekoracje",
+      "custom": "Druk na zamówienie",
+      "about": "O nas",
+      "delivery": "Płatność i dostawa"
+    },
+    "language": {
+      "header": "Wybierz język"
+    },
+    "cart": {
+      "header": "Koszyk",
+      "empty": "Koszyk jest pusty",
+      "total": "Razem",
+      "currency": "zł",
+      "watch": "Zobacz",
+      "continue": "Zamów"
+    },
+    "features": {
+      "ecology": "Ekologiczny plastik PLA",
+      "worldwide": "Dostawa na całym świecie"
+    }
+  },
+  "custom": {
+    "article": {
+      "header": "Profesjonalny druk 3D na zamówienie",
+      "subheader": "Od prototypów do produkcji seryjnej",
+      "descriptions": {
+        "quality": "W FlexiFun oferujemy wysokiej jakości druk 3D na drukarkach Bambu Lab – zaawansowane urządzenia z dokładnością do 0,1 mm. Nasz zespół profesjonalistów posiada wieloletnie doświadczenie w projektowaniu i produkcji skomplikowanych modeli funkcjonalnych, mechanizmów i unikalnych produktów z ekologicznego PLA i innych materiałów.",
+        "variety": "Specjalizujemy się w projektach o dowolnej złożoności – od prostych figurek po skomplikowane mechanizmy, prototypy i produkcję seryjną do 10 000 sztuk. Szybkość, jakość i kreatywność – to nasze główne zalety."
+      },
+      "buttons": {
+        "choose": "Wybierz produkt",
+        "order": "Zamów druk"
+      },
+      "printer": {
+        "header": "Drukarki precyzyjne Bambu Lab",
+        "features": "Szybkość • Dokładność do 0,1 mm • Wysoka jakość • Niezawodność"
+      }
+    },
+    "products": {
+      "header": "Co drukujemy",
+      "subheader": "Wybierz kategorię, która najlepiej odpowiada twoim potrzebom",
+      "products": {
+        "toys": {
+          "header": "Zabawki i mechanizmy",
+          "features": {
+            "toys": "Ruchome figurki i zabawki",
+            "guns": "Pistolety na wykałaczki",
+            "puzzles": "Łamigłówki",
+            "machines": "Złożone mechanizmy"
+          }
+        },
+        "accessories": {
+          "header": "Zabawki i mechanizmy",
+          "features": {
+            "keyrings": "Personalizowane breloki",
+            "guns": "Pistolety na wykałaczki",
+            "stands": "Podstawki pod urządzenia",
+            "decor": "Dekoracje wnętrz"
+          }
+        },
+        "mechanisms": {
+          "header": "Zabawki i mechanizmy",
+          "features": {
+            "parts": "Części zamienne do sprzętu",
+            "gears": "Koła zębate i mechanizmy",
+            "clamps": "Uchwyty i mocowania",
+            "cases": "Obudowy do urządzeń"
+          }
+        },
+        "order": "Zamów →"
+      }
+    },
+    "calculator": {
+      "header": "Kalkulator ceny druku 3D",
+      "subheader": "Prześlij swój plik i oblicz dokładną cenę",
+      "upload": {
+        "header": "Przeciągnij model 3D lub kliknij \"Wybierz plik\"",
+        "subheader": "Obsługiwane formaty STL, OBJ, 3MF (maksymalnie 50 MB)",
+        "button": "Wybierz plik",
+        "notifications": {
+          "large": "Plik jest zbyt duży. Maksymalny rozmiar: 50 MB",
+          "current": "Przesłano",
+          "uploaded": "Plik przesłany"
+        }
+      },
+      "preview": {
+        "header": "Podgląd modelu"
+      },
+      "options": {
+        "material": {
+          "header": "Materiał",
+          "plastic": {
+            "pla": "Plastik PLA",
+            "petg": "Plastik PETG",
+            "tpu": "Plastik TPU"
+          }
+        },
+        "color": {
+          "header": "Kolor",
+          "colors": {
+            "white": "Biały",
+            "black": "Czarny",
+            "blue": "Niebieski",
+            "red": "Czerwony",
+            "green": "Zielony",
+            "orange": "Pomarańczowy"
+          }
+        },
+        "quantity": {
+          "header": "Ilość",
+          "pieces": "szt"
+        }
+      },
+      "price": {
+        "calculation": "Obliczenie ceny",
+        "material": "Koszt materiału",
+        "work": "Koszt pracy",
+        "deadline": "Termin wykonania",
+        "total": "Cena całkowita",
+        "currency": "zł",
+        "hours": "godz"
+      },
+      "buttons": {
+        "reset": "Zresetuj ustawienia",
+        "order": "Zamów druk"
+      }
+    },
+    "technologies": {
+      "header": "Nasze technologie",
+      "printers": {
+        "header": "Drukarki 3D Bambu Lab",
+        "description": "Używamy najnowocześniejszych drukarek 3D Bambu Lab, które zapewniają wysoką dokładność do 0,1 mm i prędkość druku do 500 mm/s. Pozwala nam to tworzyć wysokiej jakości części z wyraźnymi konturami i gładką powierzchnią, gwarantując idealne wykonanie nawet najmniejszych elementów."
+      },
+      "materials": {
+        "header": "Materiały",
+        "pla": {
+          "header": "PLA",
+          "description": "Ekologiczny"
+        },
+        "petg": {
+          "header": "PETG",
+          "description": "Wytrzymały"
+        },
+        "tpu": {
+          "header": "TPU",
+          "description": "Elastyczny"
+        },
+        "other": {
+          "header": "?",
+          "description": "Dowolny inny"
+        }
+      },
+      "parameters": {
+        "header": "Parametry druku",
+        "width": {
+          "header": "Grubość warstwy",
+          "value": "0,1 mm - 0,3 mm"
+        },
+        "filling": {
+          "header": "Wypełnienie",
+          "value": "10% - 100%"
+        },
+        "speed": {
+          "header": "Prędkość",
+          "value": "do 500 mm/s"
+        }
+      },
+      "order": "Zamów druk"
+    }
+  },
+  "moreThanPrint": {
+    "hero": {
+      "heroTitle": "Więcej niż tylko druk 3D",
+      "heroSubtitle": "Zestawy edukacyjne, funkcjonalne mechanizmy i unikalne dekoracje",
+      "heroDescription": "Gotowe produkty i druk na zamówienie – Od prostych zabawek po zamówienia przemysłowe",
+      "buttons": {
+        "choose": "Wybierz produkt",
+        "order": "Zamów druk"
+      },
+      "sliderFirstItem": "Zestawy edukacyjne",
+      "sliderSecondItem": "Zestawy do zabawy i rozrywki",
+      "sliderThirdItem": "Dekoracje i prezenty"
+    },
+    "ecology": {
+      "ecologyTitle": "Ekologiczny i bezpieczny druk 3D",
+      "ecologyDescription": "Używamy tylko wysokiej jakości plastiku PLA, który jest biodegradowalny i nie zawiera szkodliwych substancji",
+      "ecologyDescription2": "Bezpieczne dla dzieci, bezpieczne dla planety",
+      "bio": {
+        "title": "Biodegradowalność",
+        "description": "Bezpieczne dla środowiska"
+      },
+      "safety": {
+        "title": "Bezpieczne dla dzieci",
+        "description": "Bez substancji toksycznych"
+      },
+      "eco": {
+        "title": "Ekologiczna produkcja",
+        "description": "Minimalny wpływ na przyrodę"
+      }
+    },
+    "ourWare": {
+      "ourWaresTitle": "Nasze produkty",
+      "ourWaresBtn": "Zobacz →",
+      "educationalSets": {
+        "title": "Zestawy edukacyjne",
+        "description": "Naukowo opracowane zestawy wspierające harmonijny rozwój dziecka poprzez zabawę i praktyczne zadania"
+      },
+      "playSets": {
+        "title": "Zestawy do zabawy i rozrywki",
+        "description": "Unikalne zabawki 3D, ruchome mechanizmy, łamigłówki i konstrukcje"
+      },
+      "decorSets": {
+        "title": "Dekoracje i prezenty",
+        "description": "Oryginalne ozdoby 3D i wyjątkowe prezenty z możliwością personalizacji"
+      },
+      "usefulSets": {
+        "title": "Przydatne akcesoria",
+        "description": "Praktyczne rozwiązania 3D do domu i codziennego użytku: uchwyty, organizery i podstawki"
+      }
+    },
+    "printOnDemand": {
+      "title": "Druk 3D na zamówienie",
+      "description": {
+        "first": "Używamy wysokiej jakości materiałów: PLA, PETG i inne rodzaje plastiku do różnych zastosowań.",
+        "second": "Realizujemy koncepcje od prostych figurek po złożone funkcjonalne mechanizmy."
+      },
+      "btn": "Oblicz koszt",
+      "firstItem": {
+        "title": "Ruchome zabawki i mechanizmy",
+        "description": "Drukujemy zabawki każdego rodzaju: od prostych figurek po złożone ruchome mechanizmy, gry planszowe i konstrukcje.<br/><span class='text-[var(--color-main-blue)] font-bold'>Tworzymy</span> unikalne rozwiązania do zabawy, których nie znajdziesz w masowej produkcji.",
+        "btn": "Więcej →"
+      },
+      "secondItem": {
+        "title": "Prezenty personalizowane",
+        "description": "Tworzymy unikalne prezenty z imionami, datami i osobistymi wiadomościami.<br/><span class='text-[var(--color-main-blue)] font-bold'>Ekskluzywne</span> upominki, które zachowują wyjątkowe momenty życia.",
+        "btn": "Więcej →"
+      },
+      "thirdItem": {
+        "title": "Funkcjonalne elementy",
+        "description": "Produkujemy precyzyjne elementy funkcjonalne do użytku domowego, technicznego i twórczego.<br/><span class='text-[var(--color-main-blue)] font-bold'>Od</span> odtworzenia uszkodzonych części po tworzenie nowych rozwiązań inżynieryjnych o wysokiej precyzji i trwałości.",
+        "btn": "Więcej →"
+      },
+      "fourthItem": {
+        "title": "Małe serie",
+        "description": "Profesjonalna produkcja serii <span class='text-[var(--color-main-blue)] font-bold'>od 1 do 5000</span> sztuk dla firm i marketingu.<br/>Upominki firmowe, ekskluzywne produkty i prototypy z gwarancją jakości każdego egzemplarza.",
+        "btn": "Więcej →"
+      }
+    },
+    "salesHits": {
+      "title": "Bestsellery",
+      "btn": "Kup",
+      "firstItem": {
+        "name": "FlexiFun Animal World",
+        "price": "799 UAH"
+      },
+      "secondItem": {
+        "name": "Pistolet na wykałaczki",
+        "price": "799 UAH"
+      },
+      "thirdItem": {
+        "name": "Uchwyt na telefon",
+        "price": "799 UAH"
+      }
+    },
+    "whyFlexiFun": {
+      "title": "Dlaczego FlexiFun?",
+      "firstItem": {
+        "title": "Ekologia",
+        "description": "Biodegradowalny plastik PLA"
+      },
+      "secondItem": {
+        "title": "Jakość",
+        "description": "Wysoka precyzja druku do 0.1 mm"
+      },
+      "thirdItem": {
+        "title": "Kreatywność",
+        "description": "Unikalne projekty i rozwiązania"
+      },
+      "fourthItem": {
+        "title": "Szybkość",
+        "description": "Produkcja w 1-3 dni"
+      },
+      "fifthItem": {
+        "title": "Dostawa",
+        "description": "Na terenie Ukrainy i na całym świecie"
+      }
+    }
+  },
+  "product": {
+    "categories": {
+      "firstItem": "Do domu",
+      "secondItem": "Dla roślin",
+      "thirdItem": "Do biura",
+      "fourthItem": "Oświetlenie",
+      "fifthItem": "Prezenty",
+      "sixthItem": "Święta"
+    },
+    "filtersSection": {
+      "title": "Dekoracje i prezenty",
+      "navigationFirstItem": "Główna",
+      "navigationSecondItem": "Do domu",
+      "description": "Unikalne elementy dekoracyjne i prezenty drukowane w 3D. Od funkcjonalnych podstaw po eleganckie ozdoby wnętrz. Każdy produkt można spersonalizować według życzenia, dodając imiona, napisy lub zmieniając rozmiary.",
+      "placeholderInput": "Szukaj produktów...",
+      "sortingTitle": "Sortowanie:",
+      "sortingFilters": {
+        "firstItem": "Popularne",
+        "secondItem": "Nowości",
+        "thirdItem": "Cena: od najniższej",
+        "fourthItem": "Cena: od najwyższej",
+        "fifthItem": "Możliwość personalizacji"
+      },
+      "priceName": "Cena:",
+      "from": "Od",
+      "to": "Do",
+      "btnApply": "Zastosuj",
+      "btnReset": "Resetuj",
+      "quantityFound": "Znaleziono produktów: "
+    }
+  },
+  "educationalSets": {
+    "hero": {
+      "title": "Zestawy edukacyjne FlexiFun",
+      "navigationFirstItem": "Strona główna",
+      "navigationSecondItem": "Zestawy edukacyjne FlexiFun",
+      "description": "Zestawy oparte na naukowych podstawach, wspierające harmonijny rozwój dziecka. Każdy zestaw rozwija konkretne umiejętności poprzez zabawę i zadania praktyczne. Wykorzystujemy bezpieczne materiały i nowoczesne metody."
+    },
+    "card": {
+      "firstCard": {
+        "title": "Animal World",
+        "subtitle": "Wydanie Sawanna",
+        "description": "Poznaj świat zwierząt sawanny z Twoim dzieckiem:",
+        "price": "2277 UAH",
+        "btnText": "Zobacz →",
+        "list": {
+          "itemFirst": "Poznanie 15 zwierząt i ich siedlisk",
+          "itemSecond": "Rozwijanie świadomości ekologicznej",
+          "itemThird": "Nauka poprzez ciekawą historię",
+          "itemFourth": "Wiek: 4–8 | Czas zabawy: 30–60 min | Cena: 799 UAH"
+        }
+      },
+      "secondCard": {
+        "title": "Basic Board & Memory Case",
+        "subtitle": "Rozwój pamięci",
+        "description": "Ćwicz pamięć i koncentrację w formie zabawy:",
+        "price": "899 UAH",
+        "btnText": "Zobacz →",
+        "list": {
+          "itemFirst": "Rozwój pamięci krótko- i długoterminowej",
+          "itemSecond": "Poprawa koncentracji",
+          "itemThird": "Interaktywny trener z różnymi poziomami trudności",
+          "itemFourth": "Wiek: 4–10 | Czas zabawy: 10–15 min |"
+        }
+      },
+      "thirdCard": {
+        "title": "4 Gears Fidget Spinner",
+        "subtitle": "Rozwój motoryki",
+        "description": "Rozwijaj małą motorykę i skupienie:",
+        "price": "399 UAH",
+        "btnText": "Zobacz →",
+        "list": {
+          "itemFirst": "Ćwiczenie mięśni palców poprzez ruch mechaniczny",
+          "itemSecond": "Poprawa koordynacji i refleksu",
+          "itemThird": "Ćwiczenia opracowane przez neurologów dziecięcych",
+          "itemFourth": "Wiek: 5–8 | Czas ćwiczeń: 10 min/dzień |"
+        }
+      },
+      "fourthCard": {
+        "title": "FlexiFun Robot",
+        "subtitle": "Programowanie i robotyka",
+        "description": "Pierwszy krok w świat robotyki i kodowania:",
+        "price": "Wkrótce",
+        "btnText": "Zobacz →",
+        "list": {
+          "itemFirst": "Nauka podstaw programowania poprzez zabawę",
+          "itemSecond": "Zbuduj samodzielnie robota",
+          "itemThird": "Rozwijanie myślenia logicznego i algorytmicznego",
+          "itemFourth": "Wiek: 7–12 | Czas montażu: 60–90 min |"
+        }
+      }
+    },
+    "advantages": {
+      "title": "Zalety zestawów edukacyjnych FlexiFun",
+      "list": {
+        "itemFirst": "Ekologiczne materiały",
+        "itemSecond": "Podejście naukowe",
+        "itemThird": "Bezpieczeństwo dzieci",
+        "itemFourth": "Wszechstronny rozwój"
+      }
+    },
+    "actionsKits": {
+      "mainTitle": "Nasze zestawy w akcji",
+      "list": {
+        "itemFirstTitle": "Animal World w akcji",
+        "itemSecondTitle": "Instrukcja do Memory Case",
+        "itemThirdTitle": "Pokaz 4 Gears Fidget Spinner"
+      }
+    }
+  },
+  "specificProduct": {
+    "previewSection": {
+      "navigationFirstItem": "Strona główna",
+      "navigationSecondItem": "Do domu",
+      "navigationThirdItem": "Podstawka na kadzidełka",
+      "mainTitle": "Podstawka na kadzidełka",
+      "price": "149 UAH",
+      "description": "Elegancka podstawka na kadzidełka wykonana z wysokiej jakości plastiku PLA. Pasuje do wszystkich standardowych kadzidełek. Dostępna w różnych kolorach.",
+      "characteristicsList": {
+        "title": "Specyfikacja:",
+        "firstItem": "Materiał: plastik PLA",
+        "secondItem": "Rozmiar: 10 x 10 x 5 cm",
+        "thirdItem": "Waga: 50 g",
+        "fourthItem": "Personalizacja: możliwa"
+      },
+      "colorTitle": "Kolor:",
+      "chooseColorTitle": "Wybierz własny kolor:",
+      "quantityTitle": "Ilość:",
+      "quantityEnding": "szt.",
+      "btnBuy": "Kup"
+    },
+    "descriptionSection": {
+      "title": "Podstawka na kadzidełka",
+      "descriptions": {
+        "first": "Nasza podstawka na kadzidełka to nie tylko funkcjonalny przedmiot, ale także elegancka dekoracja do wnętrza.",
+        "second": "Wykonana z ekologicznego plastiku PLA, jest bezpieczna do użytku w pomieszczeniach mieszkalnych i nie wydziela szkodliwych substancji.",
+        "third": "Podstawka ma specjalny design zapewniający stabilność i bezpieczeństwo podczas użytkowania. Łatwa do czyszczenia i trwała. Dostępna w różnych kolorach, idealnie dopasuje się do Twojego wnętrza.",
+        "forth": "Wykorzystujemy precyzyjne drukarki 3D Bambu Lab, aby zapewnić najwyższą jakość wykonania i dokładność detali."
+      },
+      "buttons": {
+        "firstBtn": "Opis",
+        "secondBtn": "Specyfikacja",
+        "thirdBtn": "Opinie"
+      },
+      "listTitle": "Cechy:",
+      "list": {
+        "firstTitle": "Ekologiczny materiał",
+        "firstDescription": "Biodegradowalny plastik PLA",
+        "secondTitle": "Różne kolory",
+        "secondDescription": "Dopasuj do swojego wnętrza",
+        "thirdTitle": "Dokładne wykonanie",
+        "thirdDescription": "Na drukarkach Bambu Lab"
+      },
+      "videoTitle": "Recenzja wideo:",
+      "alsoInterested": "Może Cię również zainteresować:"
+    }
+  },
+
+  "newsletter": {
+    "follow": "Obserwuj nas",
+    "subscribe": "Zapisz się do newslettera",
+    "information": "Otrzymuj informacje o nowościach i promocjach",
+    "email": "Twój email",
+    "submit": "Zapisz się"
+  },
+  "footer": {
+    "about": {
+      "header": "O nas",
+      "team": "Zespół",
+      "history": "Historia",
+      "contacts": "Kontakty"
+    },
+    "delivery": {
+      "header": "Dostawa i płatność",
+      "delivery": "Dostawa",
+      "payment": "Płatność",
+      "return": "Zwrot"
+    },
+    "catalogue": {
+      "header": "Katalog",
+      "development": "Zestawy edukacyjne",
+      "gaming": "Zestawy do gier",
+      "accessories": "Akcesoria",
+      "decorations": "Dekoracje"
+    },
+    "custom": {
+      "header": "Druk na zamówienie",
+      "tutorial": "Jak zamówić",
+      "materials": "Materiały",
+      "industrial": "Projekty przemysłowe",
+      "wholesale": "Duże partie"
+    },
+    "contacts": {
+      "header": "Kontakty"
+    },
+    "social": {
+      "header": "Media społecznościowe"
+    },
+    "legal": {
+      "rights": "Wszelkie prawa zastrzeżone",
+      "policies": "Polityka prywatności",
+      "terms": "Warunki korzystania"
+    }
+  }
+}

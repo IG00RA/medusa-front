@@ -1,9 +1,10 @@
+/* src/styles/globals.css */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 @layer utilities {
-  /* Chrome, Safari and Opera */
+  /* Medusa utilities */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -47,9 +48,17 @@
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
+
+  /* Your input styles */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 @layer components {
+  /* Medusa components */
   .content-container {
     @apply max-w-[1440px] w-full mx-auto px-6;
   }

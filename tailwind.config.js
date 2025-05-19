@@ -1,3 +1,4 @@
+// tailwind.config.js
 const path = require("path")
 
 module.exports = {
@@ -21,6 +22,7 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+        // Medusa’s default colors
         grey: {
           0: "#FFFFFF",
           5: "#F9FAFB",
@@ -34,6 +36,22 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+        // Your custom colors
+        "lighter-blue": "#f5f9ff",
+        "light-blue": "#e0e8f5",
+        "main-blue": "#4d80e4",
+        "dark-blue": "#303754",
+        "lighter-red": "#fff5f5",
+        "light-red": "#f5e0e0",
+        "main-red": "#f27474",
+        "lighter-green": "#f0f9f0",
+        "light-green": "#e0f5e0",
+        "main-green": "#4c934c",
+        "main-orange": "#f0ad4e",
+        "lighter-orange": "#fff9f0",
+        "light-orange": "#f5e9d0",
+        "lighter-beige": "#f5f5f5",
+        "light-beige": "#f5f5f5",
       },
       borderRadius: {
         none: "0px",
@@ -71,9 +89,10 @@ module.exports = {
         ],
       },
       keyframes: {
+        // Medusa’s keyframes
         ring: {
           "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
+          "100%": { transform: "rotate(0deg)" },
         },
         "fade-in-right": {
           "0%": {
@@ -90,7 +109,7 @@ module.exports = {
             opacity: "0",
             transform: "translateY(-10px)",
           },
-          "100%": {
+          "100%あなたの考えを教えてください！": {
             opacity: "1",
             transform: "translateY(0)",
           },
@@ -140,8 +159,16 @@ module.exports = {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(0)" },
         },
+        // Your custom keyframe
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-5px)" },
+          "50%": { transform: "translateX(5px)" },
+          "75%": { transform: "translateX(-5px)" },
+        },
       },
       animation: {
+        // Medusa’s animations
         ring: "ring 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
         "fade-in-right":
           "fade-in-right 0.3s cubic-bezier(0.5, 0, 0.5, 1) forwards",
@@ -155,6 +182,8 @@ module.exports = {
         enter: "enter 200ms ease-out",
         "slide-in": "slide-in 1.2s cubic-bezier(.41,.73,.51,1.02)",
         leave: "leave 150ms ease-in forwards",
+        // Your custom animation
+        shake: "shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both",
       },
     },
   },

@@ -1,0 +1,501 @@
+{
+  "header": {
+    "navigation": {
+      "development": "Educational Sets",
+      "games": "Game Sets",
+      "accessories": "Accessories",
+      "decorations": "Decor",
+      "custom": "Custom Printing",
+      "about": "About Us",
+      "delivery": "Payment and Delivery"
+    },
+    "language": {
+      "header": "Select Language"
+    },
+    "cart": {
+      "header": "Cart",
+      "empty": "Cart is empty",
+      "total": "Total",
+      "currency": "$",
+      "watch": "View",
+      "continue": "Checkout"
+    },
+    "features": {
+      "ecology": "Eco-friendly PLA plastic",
+      "worldwide": "Worldwide delivery"
+    }
+  },
+  "custom": {
+    "article": {
+      "header": "Professional 3D Printing on Demand",
+      "subheader": "From prototypes to serial production",
+      "descriptions": {
+        "quality": "At FlexiFun we offer high-quality 3D printing on Bambu Lab printers – cutting-edge equipment with accuracy up to 0.1 mm. Our team of professionals has years of experience in developing and manufacturing complex functional models, mechanisms, and unique products from eco-friendly PLA and other materials.",
+        "variety": "We specialize in projects of any complexity – from simple figurines to complex mechanisms, prototypes, and serial production up to 10,000 units. Speed, quality, and creativity – these are our main advantages."
+      },
+      "buttons": {
+        "choose": "Choose Product",
+        "order": "Order Print"
+      },
+      "printer": {
+        "header": "High-precision Bambu Lab Printers",
+        "features": "Speed • Accuracy up to 0.1 mm • High quality • Reliability"
+      }
+    },
+    "products": {
+      "header": "What We Print",
+      "subheader": "Choose the category that best suits your needs",
+      "products": {
+        "toys": {
+          "header": "Toys and Mechanisms",
+          "features": {
+            "toys": "Movable figurines and toys",
+            "guns": "Toothpick guns",
+            "puzzles": "Puzzles",
+            "machines": "Complex mechanisms"
+          }
+        },
+        "accessories": {
+          "header": "Toys and Mechanisms",
+          "features": {
+            "keyrings": "Personalized keychains",
+            "guns": "Toothpick guns",
+            "stands": "Device stands",
+            "decor": "Interior decorations"
+          }
+        },
+        "mechanisms": {
+          "header": "Toys and Mechanisms",
+          "features": {
+            "parts": "Spare parts for equipment",
+            "gears": "Gears and mechanisms",
+            "clamps": "Mounts and fasteners",
+            "cases": "Device cases"
+          }
+        },
+        "order": "Order →"
+      }
+    },
+    "calculator": {
+      "header": "3D Printing Cost Calculator",
+      "subheader": "Upload your file and calculate the exact cost",
+      "upload": {
+        "header": "Drag and drop your 3D model or click \"Choose File\"",
+        "subheader": "Supported formats: STL, OBJ, 3MF (maximum 50 MB)",
+        "button": "Choose File",
+        "notifications": {
+          "large": "File is too large. Maximum size: 50 MB",
+          "current": "Uploaded",
+          "uploaded": "File uploaded"
+        }
+      },
+      "preview": {
+        "header": "Model Preview"
+      },
+      "options": {
+        "material": {
+          "header": "Material",
+          "plastic": {
+            "pla": "PLA plastic",
+            "petg": "PETG plastic",
+            "tpu": "TPU plastic"
+          }
+        },
+        "color": {
+          "header": "Color",
+          "colors": {
+            "white": "White",
+            "black": "Black",
+            "blue": "Blue",
+            "red": "Red",
+            "green": "Green",
+            "orange": "Orange"
+          }
+        },
+        "quantity": {
+          "header": "Quantity",
+          "pieces": "pcs"
+        }
+      },
+      "price": {
+        "calculation": "Price Calculation",
+        "material": "Material cost",
+        "work": "Labor cost",
+        "deadline": "Production time",
+        "total": "Total cost",
+        "currency": "$",
+        "hours": "hrs"
+      },
+      "buttons": {
+        "reset": "Reset Settings",
+        "order": "Order Print"
+      }
+    },
+    "technologies": {
+      "header": "Our Technologies",
+      "printers": {
+        "header": "Bambu Lab 3D Printers",
+        "description": "We use cutting-edge Bambu Lab 3D printers, which provide high accuracy up to 0.1 mm and printing speed up to 500 mm/s. This allows us to create quality parts with sharp contours and smooth surfaces, guaranteeing perfect execution even for the smallest elements."
+      },
+      "materials": {
+        "header": "Materials",
+        "pla": {
+          "header": "PLA",
+          "description": "Eco-friendly"
+        },
+        "petg": {
+          "header": "PETG",
+          "description": "Durable"
+        },
+        "tpu": {
+          "header": "TPU",
+          "description": "Flexible"
+        },
+        "other": {
+          "header": "?",
+          "description": "Any other"
+        }
+      },
+      "parameters": {
+        "header": "Printing Parameters",
+        "width": {
+          "header": "Layer thickness",
+          "value": "0.1 mm - 0.3 mm"
+        },
+        "filling": {
+          "header": "Infill",
+          "value": "10% - 100%"
+        },
+        "speed": {
+          "header": "Speed",
+          "value": "up to 500 mm/s"
+        }
+      },
+      "order": "Order Print"
+    }
+  },
+  "moreThanPrint": {
+    "hero": {
+      "heroTitle": "More Than Just 3D Printing",
+      "heroSubtitle": "Educational kits, functional mechanisms, and unique decor",
+      "heroDescription": "Ready-made products and print-on-demand – from simple toys to industrial orders",
+      "buttons": {
+        "choose": "Choose a product",
+        "order": "Order printing"
+      },
+      "sliderFirstItem": "Educational kits",
+      "sliderSecondItem": "Play sets and entertainment",
+      "sliderThirdItem": "Decor and gifts"
+    },
+    "ecology": {
+      "ecologyTitle": "Eco-friendly and Safe 3D Printing",
+      "ecologyDescription": "We use only high-quality PLA plastic, which is biodegradable and free of harmful substances",
+      "ecologyDescription2": "Safe for children, safe for the planet",
+      "bio": {
+        "title": "Biodegradable",
+        "description": "Environmentally friendly"
+      },
+      "safety": {
+        "title": "Safe for children",
+        "description": "No toxic substances"
+      },
+      "eco": {
+        "title": "Eco-friendly production",
+        "description": "Minimal environmental impact"
+      }
+    },
+    "ourWare": {
+      "ourWaresTitle": "Our Products",
+      "ourWaresBtn": "View →",
+      "educationalSets": {
+        "title": "Educational kits",
+        "description": "Scientifically designed sets for harmonious child development through play and practical tasks"
+      },
+      "playSets": {
+        "title": "Play sets and entertainment",
+        "description": "Unique 3D toys, moving mechanisms, puzzles, and building sets"
+      },
+      "decorSets": {
+        "title": "Decor and gifts",
+        "description": "Original 3D decorations and special gifts with personalization options"
+      },
+      "usefulSets": {
+        "title": "Useful accessories",
+        "description": "Practical 3D solutions for home and everyday use — holders, organizers, and stands"
+      }
+    },
+    "printOnDemand": {
+      "title": "3D Print on Demand",
+      "description": {
+        "first": "We use quality materials: PLA, PETG, and other types of plastic for any task.",
+        "second": "We bring concepts to life, from simple figurines to complex functional mechanisms."
+      },
+      "btn": "Calculate price",
+      "firstItem": {
+        "title": "Moving Toys and Mechanisms",
+        "description": "We print toys of any type: from simple figurines to complex moving mechanisms, board games, and building sets.<br/><span class='text-[var(--color-main-blue)] font-bold'>We create</span> unique play solutions that are not mass-produced.",
+        "btn": "Learn more →"
+      },
+      "secondItem": {
+        "title": "Personalized Gifts",
+        "description": "We create unique personalized gifts with names, dates, and personal messages.<br/><span class='text-[var(--color-main-blue)] font-bold'>Exclusive</span> souvenirs that preserve special life moments.",
+        "btn": "Learn more →"
+      },
+      "thirdItem": {
+        "title": "Functional Parts",
+        "description": "We manufacture precise functional parts for household, technical, and creative needs.<br/><span class='text-[var(--color-main-blue)] font-bold'>From</span> reproducing broken components to creating new engineering solutions with high accuracy and strength.",
+        "btn": "Learn more →"
+      },
+      "fourthItem": {
+        "title": "Small Batches",
+        "description": "Professional production of series <span class='text-[var(--color-main-blue)] font-bold'>from 1 to 5000</span> units for business and marketing.<br/>Corporate souvenirs, exclusive products, and prototypes with guaranteed quality of each item.",
+        "btn": "Learn more →"
+      }
+    },
+    "salesHits": {
+      "title": "Best Sellers",
+      "btn": "Buy",
+      "firstItem": {
+        "name": "FlexiFun Animal World",
+        "price": "799 UAH"
+      },
+      "secondItem": {
+        "name": "Toothpick Gun",
+        "price": "799 UAH"
+      },
+      "thirdItem": {
+        "name": "Phone Holder",
+        "price": "799 UAH"
+      }
+    },
+    "whyFlexiFun": {
+      "title": "Why FlexiFun?",
+      "firstItem": {
+        "title": "Eco-friendliness",
+        "description": "Biodegradable PLA plastic"
+      },
+      "secondItem": {
+        "title": "Quality",
+        "description": "High print accuracy up to 0.1 mm"
+      },
+      "thirdItem": {
+        "title": "Creativity",
+        "description": "Unique designs and solutions"
+      },
+      "fourthItem": {
+        "title": "Speed",
+        "description": "Production in 1–3 days"
+      },
+      "fifthItem": {
+        "title": "Delivery",
+        "description": "Across Ukraine and worldwide"
+      }
+    }
+  },
+
+  "product": {
+    "categories": {
+      "firstItem": "For Home",
+      "secondItem": "For Plants",
+      "thirdItem": "For Office",
+      "fourthItem": "Lighting",
+      "fifthItem": "Gifts",
+      "sixthItem": "Holidays"
+    },
+    "filtersSection": {
+      "title": "Decor & Gifts",
+      "navigationFirstItem": "Home",
+      "navigationSecondItem": "For Home",
+      "description": "Unique 3D-printed decorative elements and gifts. From functional stands to elegant interior decorations. Each item can be personalized according to your wishes by adding names, inscriptions, or changing dimensions.",
+      "placeholderInput": "Search for products...",
+      "sortingTitle": "Sorting:",
+      "sortingFilters": {
+        "firstItem": "Popular",
+        "secondItem": "New Arrivals",
+        "thirdItem": "Price: Low to High",
+        "fourthItem": "Price: High to Low",
+        "fifthItem": "Personalization Available"
+      },
+      "priceName": "Price:",
+      "from": "From",
+      "to": "To",
+      "btnApply": "Apply",
+      "btnReset": "Reset",
+      "quantityFound": "Products found: "
+    }
+  },
+
+  "educationalSets": {
+    "hero": {
+      "title": "FlexiFun Educational Sets",
+      "navigationFirstItem": "Home",
+      "navigationSecondItem": "FlexiFun Educational Sets",
+      "description": "Scientifically designed kits for the harmonious development of children. Each set is created to develop specific skills through play and practical tasks. Safe materials and innovative methods are used."
+    },
+    "card": {
+      "firstCard": {
+        "title": "Animal World",
+        "subtitle": "Savanna Edition",
+        "description": "Explore the world of savanna animals with your child:",
+        "price": "2277 UAH",
+        "btnText": "View →",
+        "list": {
+          "itemFirst": "Learn about 15 different animals and their habitats",
+          "itemSecond": "Foster environmental awareness",
+          "itemThird": "Learning through an engaging story",
+          "itemFourth": "Age: 4–8 | Playtime: 30–60 min | Price: 799 UAH"
+        }
+      },
+      "secondCard": {
+        "title": "Basic Board & Memory Case",
+        "subtitle": "Memory Development",
+        "description": "Train memory and concentration through play:",
+        "price": "899 UAH",
+        "btnText": "View →",
+        "list": {
+          "itemFirst": "Develop short-term and long-term memory",
+          "itemSecond": "Improve concentration levels",
+          "itemThird": "Interactive trainer with multiple difficulty levels",
+          "itemFourth": "Age: 4–10 | Playtime: 10–15 min |"
+        }
+      },
+      "thirdCard": {
+        "title": "4 Gears Fidget Spinner",
+        "subtitle": "Motor Skills Development",
+        "description": "Develop fine motor skills and concentration:",
+        "price": "399 UAH",
+        "btnText": "View →",
+        "list": {
+          "itemFirst": "Finger muscle training through mechanical exercises",
+          "itemSecond": "Improved coordination and reflexes",
+          "itemThird": "Exercise system developed by child neurologists",
+          "itemFourth": "Age: 5–8 | Exercise time: 10 min/day |"
+        }
+      },
+      "fourthCard": {
+        "title": "FlexiFun Robot",
+        "subtitle": "Programming & Robotics",
+        "description": "A first step into programming and robotics:",
+        "price": "Coming Soon",
+        "btnText": "View →",
+        "list": {
+          "itemFirst": "Learn programming basics through play",
+          "itemSecond": "Assemble a working robot by yourself",
+          "itemThird": "Develop logical and algorithmic thinking",
+          "itemFourth": "Age: 7–12 | Assembly time: 60–90 min |"
+        }
+      }
+    },
+    "advantages": {
+      "title": "Advantages of FlexiFun Educational Sets",
+      "list": {
+        "itemFirst": "Eco-friendly materials",
+        "itemSecond": "Scientific approach",
+        "itemThird": "Child safety",
+        "itemFourth": "Comprehensive development"
+      }
+    },
+    "actionsKits": {
+      "mainTitle": "Our Sets in Action",
+      "list": {
+        "itemFirstTitle": "Animal World in Action",
+        "itemSecondTitle": "Memory Case Tutorial",
+        "itemThirdTitle": "4 Gears Fidget Spinner Demo"
+      }
+    }
+  },
+  "specificProduct": {
+    "previewSection": {
+      "navigationFirstItem": "Home",
+      "navigationSecondItem": "For home",
+      "navigationThirdItem": "Incense stick holder",
+      "mainTitle": "Incense stick holder",
+      "price": "149 UAH",
+      "description": "Elegant incense stick holder made of high-quality PLA plastic. Suitable for all standard incense sticks. Available in various colors.",
+      "characteristicsList": {
+        "title": "Specifications:",
+        "firstItem": "Material: PLA plastic",
+        "secondItem": "Size: 10 x 10 x 5 cm",
+        "thirdItem": "Weight: 50 g",
+        "fourthItem": "Personalization: available"
+      },
+      "colorTitle": "Color:",
+      "chooseColorTitle": "Choose custom color:",
+      "quantityTitle": "Quantity:",
+      "quantityEnding": "pcs",
+      "btnBuy": "Buy"
+    },
+    "descriptionSection": {
+      "title": "Incense stick holder",
+      "descriptions": {
+        "first": "Our incense stick holder is not only a functional item but also an elegant decor piece for your interior.",
+        "second": "Made from eco-friendly PLA plastic, it is safe to use in living spaces and does not emit harmful substances.",
+        "third": "The holder has a special design that ensures stability and safe use of incense sticks. It is easy to clean and retains its qualities over time. Available in various colors to match your interior perfectly.",
+        "forth": "We use high-precision Bambu Lab 3D printers to produce the holder, ensuring ideal manufacturing quality and precise details."
+      },
+      "buttons": {
+        "firstBtn": "Description",
+        "secondBtn": "Specifications",
+        "thirdBtn": "Reviews"
+      },
+      "listTitle": "Features:",
+      "list": {
+        "firstTitle": "Eco-friendly material",
+        "firstDescription": "Biodegradable PLA plastic",
+        "secondTitle": "Various colors",
+        "secondDescription": "Match your interior",
+        "thirdTitle": "Precise production",
+        "thirdDescription": "On Bambu Lab printers"
+      },
+      "videoTitle": "Video review:",
+      "alsoInterested": "You may also like:"
+    }
+  },
+
+  "newsletter": {
+    "follow": "Follow Us",
+    "subscribe": "Subscribe to our newsletter",
+    "information": "Get information about new products and promotions",
+    "email": "Your email",
+    "submit": "Subscribe"
+  },
+  "footer": {
+    "about": {
+      "header": "About Us",
+      "team": "Team",
+      "history": "History",
+      "contacts": "Contacts"
+    },
+    "delivery": {
+      "header": "Delivery and Payment",
+      "delivery": "Delivery",
+      "payment": "Payment",
+      "return": "Returns"
+    },
+    "catalogue": {
+      "header": "Catalog",
+      "development": "Educational Sets",
+      "gaming": "Game Sets",
+      "accessories": "Accessories",
+      "decorations": "Decor"
+    },
+    "custom": {
+      "header": "Custom Printing",
+      "tutorial": "How to Order",
+      "materials": "Materials",
+      "industrial": "Industrial Projects",
+      "wholesale": "Bulk Orders"
+    },
+    "contacts": {
+      "header": "Contacts"
+    },
+    "social": {
+      "header": "Social Media"
+    },
+    "legal": {
+      "rights": "All rights reserved",
+      "policies": "Privacy Policy",
+      "terms": "Terms of Use"
+    }
+  }
+}

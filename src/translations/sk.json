@@ -1,0 +1,499 @@
+{
+  "header": {
+    "navigation": {
+      "development": "Vzdelávacie sady",
+      "games": "Herné sady",
+      "accessories": "Príslušenstvo",
+      "decorations": "Dekorácie",
+      "custom": "Tlač na objednávku",
+      "about": "O nás",
+      "delivery": "Platba a doručenie"
+    },
+    "language": {
+      "header": "Vyberte jazyk"
+    },
+    "cart": {
+      "header": "Košík",
+      "empty": "Košík je prázdny",
+      "total": "Celkom",
+      "currency": "€",
+      "watch": "Zobraziť",
+      "continue": "Objednať"
+    },
+    "features": {
+      "ecology": "Ekologický PLA plast",
+      "worldwide": "Doručenie po celom svete"
+    }
+  },
+  "custom": {
+    "article": {
+      "header": "Profesionálna 3D tlač na objednávku",
+      "subheader": "Od prototypov po sériovú výrobu",
+      "descriptions": {
+        "quality": "Vo FlexiFun ponúkame vysokokvalitnú 3D tlač na tlačiarňach Bambu Lab – špičkové zariadenia s presnosťou do 0,1 mm. Náš tím profesionálov má dlhoročné skúsenosti s vývojom a výrobou zložitých funkčných modelov, mechanizmov a jedinečných výrobkov z ekologického PLA a iných materiálov.",
+        "variety": "Špecializujeme sa na projekty akejkoľvek zložitosti – od jednoduchých figúrok po zložité mechanizmy, prototypy a sériovú výrobu až do 10 000 kusov. Rýchlosť, kvalita a kreativita – to sú naše hlavné výhody."
+      },
+      "buttons": {
+        "choose": "Vybrať produkt",
+        "order": "Objednať tlač"
+      },
+      "printer": {
+        "header": "Vysokopresné tlačiarne Bambu Lab",
+        "features": "Rýchlosť • Presnosť do 0,1 mm • Vysoká kvalita • Spoľahlivosť"
+      }
+    },
+    "products": {
+      "header": "Čo tlačíme",
+      "subheader": "Vyberte kategóriu, ktorá najlepšie vyhovuje vašim potrebám",
+      "products": {
+        "toys": {
+          "header": "Hračky a mechanizmy",
+          "features": {
+            "toys": "Pohyblivé figúrky a hračky",
+            "guns": "Pištole na špáradlá",
+            "puzzles": "Hlavolamy",
+            "machines": "Zložité mechanizmy"
+          }
+        },
+        "accessories": {
+          "header": "Hračky a mechanizmy",
+          "features": {
+            "keyrings": "Personalizované kľúčenky",
+            "guns": "Pištole na špáradlá",
+            "stands": "Stojany na zariadenia",
+            "decor": "Interiérové dekorácie"
+          }
+        },
+        "mechanisms": {
+          "header": "Hračky a mechanizmy",
+          "features": {
+            "parts": "Náhradné diely pre techniku",
+            "gears": "Ozubené kolesá a mechanizmy",
+            "clamps": "Držiaky a upínadlá",
+            "cases": "Kryty pre zariadenia"
+          }
+        },
+        "order": "Objednať →"
+      }
+    },
+    "calculator": {
+      "header": "Kalkulačka ceny 3D tlače",
+      "subheader": "Nahrajte svoj súbor a vypočítajte presnú cenu",
+      "upload": {
+        "header": "Pretiahnite 3D model alebo kliknite na \"Vybrať súbor\"",
+        "subheader": "Podporované formáty STL, OBJ, 3MF (maximum 50 MB)",
+        "button": "Vybrať súbor",
+        "notifications": {
+          "large": "Súbor je príliš veľký. Maximálna veľkosť: 50 MB",
+          "current": "Nahrané",
+          "uploaded": "Súbor nahraný"
+        }
+      },
+      "preview": {
+        "header": "Náhľad modelu"
+      },
+      "options": {
+        "material": {
+          "header": "Materiál",
+          "plastic": {
+            "pla": "PLA plast",
+            "petg": "PETG plast",
+            "tpu": "TPU plast"
+          }
+        },
+        "color": {
+          "header": "Farba",
+          "colors": {
+            "white": "Biela",
+            "black": "Čierna",
+            "blue": "Modrá",
+            "red": "Červená",
+            "green": "Zelená",
+            "orange": "Oranžová"
+          }
+        },
+        "quantity": {
+          "header": "Množstvo",
+          "pieces": "ks"
+        }
+      },
+      "price": {
+        "calculation": "Výpočet ceny",
+        "material": "Cena materiálu",
+        "work": "Cena práce",
+        "deadline": "Termín výroby",
+        "total": "Celková cena",
+        "currency": "€",
+        "hours": "hod"
+      },
+      "buttons": {
+        "reset": "Resetovať nastavenia",
+        "order": "Objednať tlač"
+      }
+    },
+    "technologies": {
+      "header": "Naše technológie",
+      "printers": {
+        "header": "Bambu Lab 3D tlačiarne",
+        "description": "Používame najmodernejšie 3D tlačiarne Bambu Lab, ktoré poskytujú vysokú presnosť do 0,1 mm a rýchlosť tlače až 500 mm/s. To nám umožňuje vytvárať kvalitné diely s ostrými kontúrami a rovným povrchom, čo zaručuje dokonalé vyhotovenie aj tých najmenších prvkov."
+      },
+      "materials": {
+        "header": "Materiály",
+        "pla": {
+          "header": "PLA",
+          "description": "Ekologický"
+        },
+        "petg": {
+          "header": "PETG",
+          "description": "Odolný"
+        },
+        "tpu": {
+          "header": "TPU",
+          "description": "Pružný"
+        },
+        "other": {
+          "header": "?",
+          "description": "Akýkoľvek iný"
+        }
+      },
+      "parameters": {
+        "header": "Parametre tlače",
+        "width": {
+          "header": "Hrúbka vrstvy",
+          "value": "0,1 mm - 0,3 mm"
+        },
+        "filling": {
+          "header": "Výplň",
+          "value": "10% - 100%"
+        },
+        "speed": {
+          "header": "Rýchlosť",
+          "value": "do 500 mm/s"
+        }
+      },
+      "order": "Objednať tlač"
+    }
+  },
+  "moreThanPrint": {
+    "hero": {
+      "heroTitle": "Viac než len 3D tlač",
+      "heroSubtitle": "Vzdelávacie súpravy, funkčné mechanizmy a jedinečný dekor",
+      "heroDescription": "Hotové výrobky a tlač na objednávku – od jednoduchých hračiek po priemyselné zákazky",
+      "buttons": {
+        "choose": "Vybrať produkt",
+        "order": "Objednať tlač"
+      },
+      "sliderFirstItem": "Vzdelávacie súpravy",
+      "sliderSecondItem": "Herné súpravy a zábava",
+      "sliderThirdItem": "Dekorácie a darčeky"
+    },
+    "ecology": {
+      "ecologyTitle": "Ekologická a bezpečná 3D tlač",
+      "ecologyDescription": "Používame iba kvalitný PLA plast, ktorý je biologicky rozložiteľný a neobsahuje škodlivé látky",
+      "ecologyDescription2": "Bezpečné pre deti, bezpečné pre planétu",
+      "bio": {
+        "title": "Biologicky rozložiteľné",
+        "description": "Šetrné k životnému prostrediu"
+      },
+      "safety": {
+        "title": "Bezpečné pre deti",
+        "description": "Bez toxických látok"
+      },
+      "eco": {
+        "title": "Ekologická výroba",
+        "description": "Minimálny dopad na prírodu"
+      }
+    },
+    "ourWare": {
+      "ourWaresTitle": "Naše produkty",
+      "ourWaresBtn": "Zobraziť →",
+      "educationalSets": {
+        "title": "Vzdelávacie súpravy",
+        "description": "Vedecky navrhnuté súpravy pre harmonický rozvoj dieťaťa hrou a praktickými úlohami"
+      },
+      "playSets": {
+        "title": "Herné súpravy a zábava",
+        "description": "Jedinečné 3D hračky, pohyblivé mechanizmy, hlavolamy a stavebnice"
+      },
+      "decorSets": {
+        "title": "Dekorácie a darčeky",
+        "description": "Originálne 3D dekorácie a špeciálne darčeky s možnosťou personalizácie"
+      },
+      "usefulSets": {
+        "title": "Užitočné doplnky",
+        "description": "Praktické 3D riešenia pre domácnosť a každodenné použitie – držiaky, organizéry a stojany"
+      }
+    },
+    "printOnDemand": {
+      "title": "3D tlač na objednávku",
+      "description": {
+        "first": "Používame kvalitné materiály: PLA, PETG a iné druhy plastu pre akékoľvek potreby.",
+        "second": "Realizujeme nápady – od jednoduchých figúrok po zložité funkčné mechanizmy."
+      },
+      "btn": "Vypočítať cenu",
+      "firstItem": {
+        "title": "Pohyblivé hračky a mechanizmy",
+        "description": "Tlačíme hračky akéhokoľvek druhu: od jednoduchých figúrok po zložité pohyblivé mechanizmy, stolové hry a stavebnice.<br/><span class='text-[var(--color-main-blue)] font-bold'>Vytvárame</span> jedinečné herné riešenia, ktoré nie sú dostupné v masovej výrobe.",
+        "btn": "Viac informácií →"
+      },
+      "secondItem": {
+        "title": "Personalizované darčeky",
+        "description": "Vyrábame jedinečné personalizované darčeky s menami, dátumami a osobnými odkazmi.<br/><span class='text-[var(--color-main-blue)] font-bold'>Exkluzívne</span> suveníry, ktoré zachytávajú výnimočné životné momenty.",
+        "btn": "Viac informácií →"
+      },
+      "thirdItem": {
+        "title": "Funkčné diely",
+        "description": "Vyrábame presné funkčné diely pre domáce, technické a kreatívne potreby.<br/><span class='text-[var(--color-main-blue)] font-bold'>Od</span> repliky poškodených komponentov po nové inžinierske riešenia s vysokou presnosťou a pevnosťou.",
+        "btn": "Viac informácií →"
+      },
+      "fourthItem": {
+        "title": "Malé série",
+        "description": "Profesionálna výroba sérií <span class='text-[var(--color-main-blue)] font-bold'>od 1 do 5000</span> kusov pre biznis a marketing.<br/>Firemné suveníry, exkluzívne produkty a prototypy so zárukou kvality každého kusu.",
+        "btn": "Viac informácií →"
+      }
+    },
+    "salesHits": {
+      "title": "Najpredávanejšie",
+      "btn": "Kúpiť",
+      "firstItem": {
+        "name": "FlexiFun Zvierací svet",
+        "price": "799 Kč"
+      },
+      "secondItem": {
+        "name": "Pištoľ na špáradlá",
+        "price": "799 Kč"
+      },
+      "thirdItem": {
+        "name": "Držiak na telefón",
+        "price": "799 Kč"
+      }
+    },
+    "whyFlexiFun": {
+      "title": "Prečo FlexiFun?",
+      "firstItem": {
+        "title": "Ekologickosť",
+        "description": "Biologicky rozložiteľný PLA plast"
+      },
+      "secondItem": {
+        "title": "Kvalita",
+        "description": "Vysoká presnosť tlače do 0.1 mm"
+      },
+      "thirdItem": {
+        "title": "Kreativita",
+        "description": "Jedinečné dizajny a riešenia"
+      },
+      "fourthItem": {
+        "title": "Rýchlosť",
+        "description": "Výroba za 1–3 dni"
+      },
+      "fifthItem": {
+        "title": "Doručenie",
+        "description": "Po celej Ukrajine a do zahraničia"
+      }
+    }
+  },
+  "product": {
+    "categories": {
+      "firstItem": "Pre domov",
+      "secondItem": "Pre rastliny",
+      "thirdItem": "Do kancelárie",
+      "fourthItem": "Osvetlenie",
+      "fifthItem": "Darčeky",
+      "sixthItem": "Sviatky"
+    },
+    "filtersSection": {
+      "title": "Dekorácie a darčeky",
+      "navigationFirstItem": "Domov",
+      "navigationSecondItem": "Pre domov",
+      "description": "Unikátne 3D tlačené dekoratívne prvky a darčeky. Od funkčných podstavcov po elegantné interiérové dekorácie. Každý výrobok je možné personalizovať podľa vašich požiadaviek – pridaním mien, nápisov alebo úpravou veľkostí.",
+      "placeholderInput": "Hľadať produkty...",
+      "sortingTitle": "Triediť:",
+      "sortingFilters": {
+        "firstItem": "Obľúbené",
+        "secondItem": "Novinky",
+        "thirdItem": "Cena: od najnižšej",
+        "fourthItem": "Cena: od najvyššej",
+        "fifthItem": "Možnosť personalizácie"
+      },
+      "priceName": "Cena:",
+      "from": "Od",
+      "to": "Do",
+      "btnApply": "Použiť",
+      "btnReset": "Resetovať",
+      "quantityFound": "Nájdených produktov: "
+    }
+  },
+  "educationalSets": {
+    "hero": {
+      "title": "Vzdelávacie sady FlexiFun",
+      "navigationFirstItem": "Domov",
+      "navigationSecondItem": "Vzdelávacie sady FlexiFun",
+      "description": "Vedecky zostavené sady pre harmonický rozvoj detí. Každá sada je navrhnutá na rozvoj konkrétnych zručností cez hru a praktické úlohy. Používame bezpečné materiály a inovatívne metódy."
+    },
+    "card": {
+      "firstCard": {
+        "title": "Animal World",
+        "subtitle": "Savanna Edícia",
+        "description": "Preskúmajte svet zvierat savany s vaším dieťaťom:",
+        "price": "2277 UAH",
+        "btnText": "Zobraziť →",
+        "list": {
+          "itemFirst": "Spoznanie 15 zvierat a ich prostredia",
+          "itemSecond": "Rozvoj environmentálneho povedomia",
+          "itemThird": "Vzdelávanie cez pútavý príbeh",
+          "itemFourth": "Vek: 4–8 | Herný čas: 30–60 min | Cena: 799 UAH"
+        }
+      },
+      "secondCard": {
+        "title": "Basic Board & Memory Case",
+        "subtitle": "Rozvoj pamäti",
+        "description": "Trénujte pamäť a sústredenie hravou formou:",
+        "price": "899 UAH",
+        "btnText": "Zobraziť →",
+        "list": {
+          "itemFirst": "Rozvoj krátkodobej a dlhodobej pamäti",
+          "itemSecond": "Zlepšenie koncentrácie",
+          "itemThird": "Interaktívny tréner s rôznou náročnosťou",
+          "itemFourth": "Vek: 4–10 | Doba hry: 10–15 min |"
+        }
+      },
+      "thirdCard": {
+        "title": "4 Gears Fidget Spinner",
+        "subtitle": "Rozvoj motoriky",
+        "description": "Rozvíjajte jemnú motoriku a pozornosť:",
+        "price": "399 UAH",
+        "btnText": "Zobraziť →",
+        "list": {
+          "itemFirst": "Tréning prstových svalov pomocou mechanických cvičení",
+          "itemSecond": "Zlepšenie koordinácie a reakcií",
+          "itemThird": "Cvičenia vytvorené detskými neurológmi",
+          "itemFourth": "Vek: 5–8 | Cvičenie: 10 min/deň |"
+        }
+      },
+      "fourthCard": {
+        "title": "FlexiFun Robot",
+        "subtitle": "Programovanie a robotika",
+        "description": "Prvý krok do sveta robotiky a kódovania:",
+        "price": "Už čoskoro",
+        "btnText": "Zobraziť →",
+        "list": {
+          "itemFirst": "Učenie sa základov programovania hrou",
+          "itemSecond": "Postavte si vlastného robota",
+          "itemThird": "Rozvoj logického a algoritmického myslenia",
+          "itemFourth": "Vek: 7–12 | Čas montáže: 60–90 min |"
+        }
+      }
+    },
+    "advantages": {
+      "title": "Výhody vzdelávacích sád FlexiFun",
+      "list": {
+        "itemFirst": "Ekologické materiály",
+        "itemSecond": "Vedecký prístup",
+        "itemThird": "Bezpečnosť detí",
+        "itemFourth": "Komplexný rozvoj"
+      }
+    },
+    "actionsKits": {
+      "mainTitle": "Naše sady v akcii",
+      "list": {
+        "itemFirstTitle": "Animal World v praxi",
+        "itemSecondTitle": "Návod na Memory Case",
+        "itemThirdTitle": "Ukážka 4 Gears Fidget Spinner"
+      }
+    }
+  },
+
+  "specificProduct": {
+    "previewSection": {
+      "navigationFirstItem": "Domov",
+      "navigationSecondItem": "Do domácnosti",
+      "navigationThirdItem": "Držiak na vonné tyčinky",
+      "mainTitle": "Držiak na vonné tyčinky",
+      "price": "149 UAH",
+      "description": "Elegantný držiak na vonné tyčinky vyrobený z kvalitného PLA plastu. Vhodný pre všetky štandardné vonné tyčinky. Dostupný v rôznych farbách.",
+      "characteristicsList": {
+        "title": "Špecifikácie:",
+        "firstItem": "Materiál: PLA plast",
+        "secondItem": "Rozmery: 10 x 10 x 5 cm",
+        "thirdItem": "Hmotnosť: 50 g",
+        "fourthItem": "Personalizácia: možná"
+      },
+      "colorTitle": "Farba:",
+      "chooseColorTitle": "Vyberte vlastnú farbu:",
+      "quantityTitle": "Množstvo:",
+      "quantityEnding": "ks",
+      "btnBuy": "Kúpiť"
+    },
+    "descriptionSection": {
+      "title": "Držiak na vonné tyčinky",
+      "descriptions": {
+        "first": "Náš držiak na vonné tyčinky je nielen funkčný predmet, ale aj elegantná dekorácia do interiéru.",
+        "second": "Vyrobený z ekologického PLA plastu, je bezpečný na použitie v obytných priestoroch a neuvoľňuje škodlivé látky.",
+        "third": "Držiak má špeciálny dizajn, ktorý zabezpečuje stabilitu a bezpečné používanie. Ľahko sa čistí a nestráca svoje vlastnosti. Dostupný v rôznych farbách, aby dokonale ladil s vaším interiérom.",
+        "forth": "Na výrobu používame vysoko presné 3D tlačiarne Bambu Lab, čo zaručuje ideálnu kvalitu a presnosť detailov."
+      },
+      "buttons": {
+        "firstBtn": "Popis",
+        "secondBtn": "Špecifikácie",
+        "thirdBtn": "Recenzie"
+      },
+      "listTitle": "Vlastnosti:",
+      "list": {
+        "firstTitle": "Ekologický materiál",
+        "firstDescription": "Biologicky rozložiteľný PLA plast",
+        "secondTitle": "Rôzne farby",
+        "secondDescription": "Vyberte podľa vášho interiéru",
+        "thirdTitle": "Presná výroba",
+        "thirdDescription": "Na tlačiarňach Bambu Lab"
+      },
+      "videoTitle": "Video recenzia:",
+      "alsoInterested": "Mohlo by vás tiež zaujímať:"
+    }
+  },
+  "newsletter": {
+    "follow": "Sledujte nás",
+    "subscribe": "Prihláste sa na odber noviniek",
+    "information": "Získavajte informácie o novinkách a akciách",
+    "email": "Váš email",
+    "submit": "Prihlásiť sa"
+  },
+  "footer": {
+    "about": {
+      "header": "O nás",
+      "team": "Tím",
+      "history": "História",
+      "contacts": "Kontakty"
+    },
+    "delivery": {
+      "header": "Doručenie a platba",
+      "delivery": "Doručenie",
+      "payment": "Platba",
+      "return": "Vrátenie"
+    },
+    "catalogue": {
+      "header": "Katalóg",
+      "development": "Vzdelávacie sady",
+      "gaming": "Herné sady",
+      "accessories": "Príslušenstvo",
+      "decorations": "Dekorácie"
+    },
+    "custom": {
+      "header": "Tlač na objednávku",
+      "tutorial": "Ako objednať",
+      "materials": "Materiály",
+      "industrial": "Priemyselné projekty",
+      "wholesale": "Veľké série"
+    },
+    "contacts": {
+      "header": "Kontakty"
+    },
+    "social": {
+      "header": "Sociálne siete"
+    },
+    "legal": {
+      "rights": "Všetky práva vyhradené",
+      "policies": "Zásady ochrany osobných údajov",
+      "terms": "Podmienky používania"
+    }
+  }
+}
