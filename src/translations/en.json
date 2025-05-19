@@ -406,6 +406,7 @@
   },
   "specificProduct": {
     "previewSection": {
+      "addedToCart": "Product added to cart!!",
       "navigationFirstItem": "Home",
       "navigationSecondItem": "For home",
       "navigationThirdItem": "Incense stick holder",

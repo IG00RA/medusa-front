@@ -408,6 +408,7 @@
 
   "specificProduct": {
     "previewSection": {
+      "addedToCart": "Товар додано до кошика!",
       "navigationFirstItem": "Головна",
       "navigationSecondItem": "Для дому",
       "navigationThirdItem": "Підставка для аромапаличок",

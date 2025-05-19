@@ -404,6 +404,7 @@
   },
   "specificProduct": {
     "previewSection": {
+      "addedToCart": "Produkt dodany do koszyka!",
       "navigationFirstItem": "Strona główna",
       "navigationSecondItem": "Do domu",
       "navigationThirdItem": "Podstawka na kadzidełka",

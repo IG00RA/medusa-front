@@ -405,6 +405,7 @@
   },
   "specificProduct": {
     "previewSection": {
+      "addedToCart": "Produkt přidán do košíku!",
       "navigationFirstItem": "Domů",
       "navigationSecondItem": "Do domácnosti",
       "navigationThirdItem": "Stojánek na vonné tyčinky",

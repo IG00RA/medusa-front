@@ -411,6 +411,7 @@ interface LocalizationData {
 
   specificProduct: {
     previewSection: {
+      addedToCart: string
       navigationFirstItem: string
       navigationSecondItem: string
       navigationThirdItem: string

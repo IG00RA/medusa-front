@@ -405,6 +405,7 @@
 
   "specificProduct": {
     "previewSection": {
+      "addedToCart": "Produkt pridaný do košíka!",
       "navigationFirstItem": "Domov",
       "navigationSecondItem": "Do domácnosti",
       "navigationThirdItem": "Držiak na vonné tyčinky",
