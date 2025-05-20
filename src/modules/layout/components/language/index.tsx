@@ -1,4 +1,3 @@
-// src/modules/layout/templates/nav/language.tsx
 "use client"
 
 import { useState, useEffect, useRef } from "react"

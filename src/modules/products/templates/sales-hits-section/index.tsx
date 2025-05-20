@@ -10,6 +10,7 @@ import { Navigation } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
 import ProductPrice from "../../components/product-price"
+import { useEffect } from "react"
 
 interface SalesHitsSectionProps {
   theme: {
@@ -22,6 +23,10 @@ interface SalesHitsSectionProps {
 }
 
 const SalesHitsSection = ({ theme, products }: SalesHitsSectionProps) => {
+  useEffect(() => {
+    console.log("products", products)
+  }, [products])
+
   const defaultTheme = {
     mainColor: "var(--color-main-blue)",
     bgColor: "bg-[#F9F9F9]",

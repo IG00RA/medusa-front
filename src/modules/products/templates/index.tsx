@@ -3,6 +3,7 @@ import PreviewSection from "./preview-section"
 import DescriptionSection from "./description-section"
 import SalesHitsSection from "./sales-hits-section"
 import { listProducts } from "@lib/data/products"
+import { listCategories } from "@/lib/data/categories"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -18,6 +19,8 @@ export default async function ProductTemplate({
   if (!product || !product.id) {
     return null
   }
+
+  const productCategories = await listCategories()
 
   const themeColors = {
     mainColor: "#f0ad4e",
@@ -52,6 +55,7 @@ export default async function ProductTemplate({
     <main className="bg-[#F9F9F9]">
       <PreviewSection
         theme={themeColors}
+        categories={productCategories}
         product={product}
         region={region}
         countryCode={countryCode}

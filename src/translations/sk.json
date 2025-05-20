@@ -414,10 +414,14 @@
       "description": "Elegantný držiak na vonné tyčinky vyrobený z kvalitného PLA plastu. Vhodný pre všetky štandardné vonné tyčinky. Dostupný v rôznych farbách.",
       "characteristicsList": {
         "title": "Špecifikácie:",
-        "firstItem": "Materiál: PLA plast",
-        "secondItem": "Rozmery: 10 x 10 x 5 cm",
-        "thirdItem": "Hmotnosť: 50 g",
-        "fourthItem": "Personalizácia: možná"
+        "firstItem": "Materiál:",
+        "secondItem": "Rozmery:",
+        "thirdItem": "Hmotnosť:",
+        "cm": "cm",
+        "weight": "g",
+        "personalization": "možné",
+        "noPersonalization": "nemožné",
+        "fourthItem": "Personalizácia:"
       },
       "colorTitle": "Farba:",
       "chooseColorTitle": "Vyberte vlastnú farbu:",

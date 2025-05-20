@@ -414,10 +414,14 @@
       "description": "Elegantní stojánek na vonné tyčinky vyrobený z vysoce kvalitního PLA plastu. Vhodný pro všechny standardní tyčinky. Dostupný v různých barvách.",
       "characteristicsList": {
         "title": "Specifikace:",
-        "firstItem": "Materiál: PLA plast",
-        "secondItem": "Rozměr: 10 x 10 x 5 cm",
-        "thirdItem": "Hmotnost: 50 g",
-        "fourthItem": "Personalizace: možná"
+        "firstItem": "Materiál:",
+        "secondItem": "Rozměr:",
+        "thirdItem": "Hmotnost:",
+        "cm": "cm",
+        "weight": "g",
+        "personalization": "možná",
+        "noPersonalization": "nemožné",
+        "fourthItem": "Personalizace:"
       },
       "colorTitle": "Barva:",
       "chooseColorTitle": "Vyberte si vlastní barvu:",

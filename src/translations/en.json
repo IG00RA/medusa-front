@@ -415,9 +415,13 @@
       "description": "Elegant incense stick holder made of high-quality PLA plastic. Suitable for all standard incense sticks. Available in various colors.",
       "characteristicsList": {
         "title": "Specifications:",
-        "firstItem": "Material: PLA plastic",
-        "secondItem": "Size: 10 x 10 x 5 cm",
-        "thirdItem": "Weight: 50 g",
+        "firstItem": "Material:",
+        "secondItem": "Size:",
+        "thirdItem": "Weight:",
+        "cm": "cm",
+        "weight": "g",
+        "personalization": "available",
+        "noPersonalization": "not possible",
         "fourthItem": "Personalization: available"
       },
       "colorTitle": "Color:",

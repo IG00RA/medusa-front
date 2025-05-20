@@ -8,6 +8,8 @@ import Image from "next/image"
 import toast, { Toaster } from "react-hot-toast"
 import { IoPlaySharp } from "react-icons/io5"
 import ProductPrice from "@modules/products/components/product-price"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { usePathname } from "next/navigation"
 
 interface PreviewSectionProps {
   theme: {
@@ -20,12 +22,14 @@ interface PreviewSectionProps {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
   countryCode: string
+  categories: HttpTypes.StoreProductCategory[]
 }
 
 const PreviewSection = ({
   theme,
   product,
   region,
+  categories,
   countryCode,
 }: PreviewSectionProps) => {
   const [quantity, setQuantity] = useState(1)
@@ -34,6 +38,7 @@ const PreviewSection = ({
   >(product.variants?.[0] || undefined)
   const [activeThumbnail, setActiveThumbnail] = useState<number | null>(1)
   const [isAdding, setIsAdding] = useState(false)
+  const pathname = usePathname()
   const t = useTranslations().specificProduct.previewSection
 
   useEffect(() => {
@@ -62,6 +67,32 @@ const PreviewSection = ({
   ]
 
   const [activeColor, setActiveColor] = useState(colors[0])
+
+  const getLocaleFromPath = (pathname: string): string => {
+    const pathSegments = pathname.split("/")
+    return pathSegments[1] || "ua"
+  }
+
+  const currentLocale = getLocaleFromPath(pathname || "")
+
+  const productCategory = categories.find((category) =>
+    category.products?.some((p) => p.id === product.id)
+  )
+
+  const getLocalizedCategoryName = (
+    category: HttpTypes.StoreProductCategory | undefined
+  ): string => {
+    if (!category) {
+      return t.navigationSecondItem || "Category"
+    }
+    if (
+      category.metadata &&
+      typeof category.metadata[currentLocale] === "string"
+    ) {
+      return category.metadata[currentLocale] as string
+    }
+    return category.name || "Category"
+  }
 
   const handleVariantChange = (colorName: string) => {
     const variant = product.variants?.find((v) =>
@@ -94,21 +125,44 @@ const PreviewSection = ({
     }
   }
 
+  useEffect(() => {
+    console.log("product", product)
+  }, [product])
+
+  const hasPersonalization = product?.tags?.some(
+    (tag) => tag.value === "Personalization"
+  )
+
   return (
     <section className={`mx-auto px-[16px] pt-[24px] ${theme.bgColor}`}>
       <Toaster position="top-center" reverseOrder={false} />
       <nav className="flex gap-[8px] items-center text-[14px] text-[#A7A7A7] mb-[12px] max-w-[1408px] mx-auto">
-        <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[60px]">
+        <LocalizedClientLink
+          href="/"
+          className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[60px] hover:text-[#444444]"
+        >
           {t.navigationFirstItem}
-        </span>
+        </LocalizedClientLink>
         <span className="text-[#444444]">{">"}</span>
-        <span className="text-[#444444] whitespace-nowrap">
-          {t.navigationSecondItem}
-        </span>
+        {productCategory ? (
+          <LocalizedClientLink
+            href={`/categories/${productCategory.handle}`}
+            className="text-[#444444] whitespace-nowrap hover:text-[${theme.textColor}]"
+          >
+            {getLocalizedCategoryName(productCategory)}
+          </LocalizedClientLink>
+        ) : (
+          <span className="text-[#444444] whitespace-nowrap">
+            {t.navigationSecondItem}
+          </span>
+        )}
         <span className="text-[#444444]">{">"}</span>
-        <span className={`${theme.textColor} whitespace-nowrap`}>
+        <LocalizedClientLink
+          href={`/products/${product.handle}`}
+          className={`${theme.textColor} whitespace-nowrap hover:underline`}
+        >
           {product.title}
-        </span>
+        </LocalizedClientLink>
       </nav>
       <div className="lg:w-[1408px] pb-[32px] mx-auto lg:flex lg:gap-[43px] lg:items-center lg:justify-center border-y-[1px] border-y-[#F5E9D0] lg:py-[48px]">
         <div>
@@ -166,17 +220,30 @@ const PreviewSection = ({
               <ProductPrice product={product} variant={selectedVariant} />
             </div>
             <p className="text-[14px] text-[#555555] lg:text-[16px]">
-              {product.description || t.description}
+              {product.subtitle || t.description}
             </p>
             <div className="mt-[16px]">
               <h3 className="font-bold text-[16px] mb-[8px] text-[var(--color-dark-blue)]">
                 {t.characteristicsList.title}
               </h3>
               <ul className="flex flex-col gap-[8px] text-[#555555] text-[16px]">
-                <li>• {t.characteristicsList.firstItem}</li>
-                <li>• {t.characteristicsList.secondItem}</li>
-                <li>• {t.characteristicsList.thirdItem}</li>
-                <li>• {t.characteristicsList.fourthItem}</li>
+                <li>
+                  • {t.characteristicsList.firstItem} {product.material}
+                </li>
+                <li>
+                  • {t.characteristicsList.secondItem} {product.width} x{" "}
+                  {product.length} x {product.height} {t.characteristicsList.cm}
+                </li>
+                <li>
+                  • {t.characteristicsList.thirdItem} {product.weight}{" "}
+                  {t.characteristicsList.weight}
+                </li>
+                <li>
+                  •{" "}
+                  {hasPersonalization
+                    ? `${t.characteristicsList.fourthItem} ${t.characteristicsList.personalization}`
+                    : `${t.characteristicsList.fourthItem} ${t.characteristicsList.noPersonalization}`}
+                </li>
               </ul>
             </div>
           </div>

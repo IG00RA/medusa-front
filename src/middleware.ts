@@ -1,4 +1,3 @@
-// middleware.ts
 import { HttpTypes } from "@medusajs/types"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -33,7 +32,7 @@ async function getRegionMap(cacheId: string) {
         revalidate: 3600,
         tags: [`regions-${cacheId}`],
       },
-      cache: "force-cache",
+      cache: "no-store",
     }).then(async (response) => {
       const json = await response.json()
       if (!response.ok) {

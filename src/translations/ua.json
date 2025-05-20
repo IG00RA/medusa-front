@@ -417,10 +417,14 @@
       "description": "Елегантна підставка для аромапаличок виготовлена з високоякісного PLA пластику. Підходить для всіх стандартних аромапаличок. Доступна в різних кольорах.",
       "characteristicsList": {
         "title": "Характеристики:",
-        "firstItem": "Матеріал: PLA пластик",
-        "secondItem": "Розмір: 10 x 10 x 5 см",
-        "thirdItem": "Вага: 50 г",
-        "fourthItem": "Персоналізація: можлива"
+        "firstItem": "Матеріал:",
+        "secondItem": "Розмір:",
+        "thirdItem": "Вага:",
+        "cm": "см",
+        "weight": "г",
+        "personalization": "можлива",
+        "noPersonalization": "неможлива",
+        "fourthItem": "Персоналізація:"
       },
       "colorTitle": "Колір:",
       "chooseColorTitle": "Обрати кастом колір:",

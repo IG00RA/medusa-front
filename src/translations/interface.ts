@@ -423,6 +423,10 @@ interface LocalizationData {
         firstItem: string
         secondItem: string
         thirdItem: string
+        cm: string
+        weight: string
+        personalization: string
+        noPersonalization: string
         fourthItem: string
       }
       colorTitle: string

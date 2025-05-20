@@ -4,6 +4,7 @@ import Image from "next/image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 import { useTranslations } from "@/lib/localization"
+import { useEffect } from "react"
 
 type FooterProps = {
   collections: HttpTypes.StoreCollection[]

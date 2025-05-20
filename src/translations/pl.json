@@ -413,10 +413,14 @@
       "description": "Elegancka podstawka na kadzidełka wykonana z wysokiej jakości plastiku PLA. Pasuje do wszystkich standardowych kadzidełek. Dostępna w różnych kolorach.",
       "characteristicsList": {
         "title": "Specyfikacja:",
-        "firstItem": "Materiał: plastik PLA",
-        "secondItem": "Rozmiar: 10 x 10 x 5 cm",
-        "thirdItem": "Waga: 50 g",
-        "fourthItem": "Personalizacja: możliwa"
+        "firstItem": "Materiał:",
+        "secondItem": "Rozmiar:",
+        "thirdItem": "Waga:",
+        "cm": "cm",
+        "weight": "g",
+        "personalization": "możliwe",
+        "noPersonalization": "niemożliwe",
+        "fourthItem": "Personalizacja:"
       },
       "colorTitle": "Kolor:",
       "chooseColorTitle": "Wybierz własny kolor:",
