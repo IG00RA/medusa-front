@@ -2,6 +2,7 @@ import { clx } from "@medusajs/ui"
 
 import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
+import { useTranslations } from "@/lib/localization"
 
 export default function ProductPrice({
   product,
@@ -17,6 +18,8 @@ export default function ProductPrice({
 
   const selectedPrice = variant ? variantPrice : cheapestPrice
 
+  const t = useTranslations().specificProduct.previewSection
+
   if (!selectedPrice) {
     return <div className="block w-32 h-9 bg-gray-100 animate-pulse" />
   }
@@ -30,10 +33,11 @@ export default function ProductPrice({
       >
         {!variant && "From "}
         <span
+          className="text-[#f0ad4e] font-bold text-[32px] mb-[16px]"
           data-testid="product-price"
           data-value={selectedPrice.calculated_price_number}
         >
-          {selectedPrice.calculated_price}
+          {selectedPrice.calculated_price_number} {t.price}
         </span>
       </span>
       {selectedPrice.price_type === "sale" && (
