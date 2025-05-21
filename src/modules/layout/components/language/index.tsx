@@ -6,6 +6,7 @@ import Image from "next/image"
 
 interface Language {
   short: string
+  displayShort: string
   full: string
 }
 
@@ -16,11 +17,11 @@ export default function Language({ mobile }: { mobile?: boolean }) {
   const languageRef = useRef<HTMLDivElement>(null)
 
   const languages: Language[] = [
-    { short: "ua", full: "Українська" },
-    { short: "sk", full: "Slovenská" },
-    { short: "en", full: "English" },
-    { short: "pl", full: "Polska" },
-    { short: "cz", full: "Čeština" },
+    { short: "ua", displayShort: "ua", full: "Українська" },
+    { short: "sk", displayShort: "sk", full: "Slovenská" },
+    { short: "us", displayShort: "en", full: "English" },
+    { short: "pl", displayShort: "pl", full: "Polska" },
+    { short: "cz", displayShort: "cz", full: "Čeština" },
   ]
 
   const getLocaleFromPath = (pathname: string): string => {
@@ -38,7 +39,7 @@ export default function Language({ mobile }: { mobile?: boolean }) {
   }
 
   const changeLanguage = (newLocale: string) => {
-    const currentPath = pathname.replace(/^\/(ua|sk|en|pl|cz)/, "")
+    const currentPath = pathname.replace(/^\/(ua|sk|us|pl|cz)/, "")
     router.push(`/${newLocale}${currentPath}`)
     setMenu(false)
   }
@@ -64,7 +65,7 @@ export default function Language({ mobile }: { mobile?: boolean }) {
       >
         <div className="flex gap-3 items-center">
           <span className="bg-main-blue rounded-sm h-6 flex items-center justify-center aspect-square font-bold text-white text-xs">
-            {getCurrentLanguage().short.toUpperCase()}
+            {getCurrentLanguage().displayShort.toUpperCase()}
           </span>
           {getCurrentLanguage().full}
         </div>
@@ -105,7 +106,7 @@ export default function Language({ mobile }: { mobile?: boolean }) {
                           : "bg-neutral-300 text-dark-blue"
                       } rounded-sm h-6 flex items-center justify-center aspect-square font-bold text-xs`}
                     >
-                      {lang.short.toUpperCase()}
+                      {lang.displayShort.toUpperCase()}
                     </span>
                     {lang.full}
                   </div>

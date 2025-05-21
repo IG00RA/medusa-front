@@ -30,22 +30,7 @@ export default async function ProductTemplate({
     borderColor: "border-[#f0ad4e]",
   }
 
-  const queryParams: HttpTypes.StoreProductParams = {}
-  if (region?.id) {
-    queryParams.region_id = region.id
-  }
-  if (product.collection_id) {
-    queryParams.collection_id = [product.collection_id]
-  }
-  if (product.tags) {
-    queryParams.tag_id = product.tags
-      .map((t) => t.id)
-      .filter(Boolean) as string[]
-  }
-  queryParams.is_giftcard = false
-
   const products = await listProducts({
-    queryParams,
     countryCode,
   }).then(({ response }) =>
     response.products.filter((p) => p.id !== product.id)
@@ -60,13 +45,13 @@ export default async function ProductTemplate({
         region={region}
         countryCode={countryCode}
       />
-      <DescriptionSection theme={themeColors} product={product} />
-      <SalesHitsSection
+      <DescriptionSection
+        categories={productCategories}
+        products={products}
         theme={themeColors}
         product={product}
-        countryCode={countryCode}
-        products={products}
       />
+      <SalesHitsSection theme={themeColors} products={products} />
     </main>
   )
 }

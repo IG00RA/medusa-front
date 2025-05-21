@@ -3,16 +3,16 @@
 import { usePathname } from "next/navigation"
 import ua from "@/translations/ua.json"
 import sk from "@/translations/sk.json"
-import en from "@/translations/en.json"
+import us from "@/translations/en.json"
 import pl from "@/translations/pl.json"
 import cz from "@/translations/cz.json"
 
-const dictionaries = { ua, sk, en, pl, cz }
+const dictionaries = { ua, sk, us, pl, cz }
 
-export function useLocale(): "ua" | "sk" | "en" | "pl" | "cz" {
+export function useLocale(): "ua" | "sk" | "us" | "pl" | "cz" {
   const pathname = usePathname()
-  const locale = pathname.split("/")[1] as "ua" | "sk" | "en" | "pl" | "cz"
-  return ["ua", "sk", "en", "pl", "cz"].includes(locale) ? locale : "ua"
+  const locale = pathname.split("/")[1] as "ua" | "sk" | "us" | "pl" | "cz"
+  return ["ua", "sk", "us", "pl", "cz"].includes(locale) ? locale : "ua"
 }
 
 export function useTranslations() {

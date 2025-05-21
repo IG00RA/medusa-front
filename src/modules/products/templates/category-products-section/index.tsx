@@ -11,8 +11,9 @@ import "swiper/css"
 import "swiper/css/navigation"
 import ProductPrice from "../../components/product-price"
 import { useEffect } from "react"
+import { usePathname } from "next/navigation"
 
-interface SalesHitsSectionProps {
+interface CategoryProductsSectionProps {
   theme: {
     mainColor: string
     bgColor: string
@@ -20,9 +21,20 @@ interface SalesHitsSectionProps {
     borderColor: string
   }
   products: HttpTypes.StoreProduct[]
+  product: HttpTypes.StoreProduct
+  categories: HttpTypes.StoreProductCategory[]
 }
 
-const SalesHitsSection = ({ theme, products }: SalesHitsSectionProps) => {
+const CategoryProductsSection = ({
+  theme,
+  products,
+  product,
+  categories,
+}: CategoryProductsSectionProps) => {
+  const selectedCategory = categories.find((category) =>
+    category.products?.some((p) => p.id === product.id)
+  )
+
   const defaultTheme = {
     mainColor: "var(--color-main-blue)",
     bgColor: "bg-[#F9F9F9]",
@@ -30,25 +42,40 @@ const SalesHitsSection = ({ theme, products }: SalesHitsSectionProps) => {
     borderColor: "border-[var(--color-main-blue)]",
   }
 
+  const pathname = usePathname()
+
   const t = useTranslations().moreThanPrint.salesHits
   const tSec = useTranslations().specificProduct.previewSection
 
   const mergedTheme = { ...defaultTheme, ...theme }
 
-  const hitProducts = products.filter((product) =>
-    product.tags?.some((tag) => tag.value === "hit")
+  const categoryProducts = products.filter((product) =>
+    selectedCategory?.products?.some((p) => p.id === product.id)
   )
 
+  const getLocaleFromPath = (pathname: string): string => {
+    const pathSegments = pathname.split("/")
+    return pathSegments[1] || "ua"
+  }
+
+  const getLocalizedCategoryName = (
+    category: HttpTypes.StoreProductCategory | undefined
+  ): string => {
+    if (!category) {
+      return t.title || "Category Products"
+    }
+    const currentLocale = getLocaleFromPath(pathname || "ua")
+    if (
+      category.metadata &&
+      typeof category.metadata[currentLocale] === "string"
+    ) {
+      return category.metadata[currentLocale] as string
+    }
+    return category.name || "Category Products"
+  }
+
   return (
-    <section className="py-[64px] px-[16px] lg:py-[112px] bg-[#F9F9F9] relative">
-      <div className="max-w-[1408px] mx-auto flex flex-col lg:flex-wrap items-center mb-[64px]">
-        <h2 className="text-[32px] font-bold text-[var(--color-dark-blue)] leading-[1.2] text-center">
-          {t.title}
-        </h2>
-        <div
-          className={`w-[100px] h-[3px] ${mergedTheme.btnBgColor} mt-[8px]`}
-        ></div>
-      </div>
+    <section className="py-[16px] px-[16px] lg:py-[24px] bg-[#F9F9F9] relative">
       <div className="relative max-w-[932px] mx-auto">
         <Swiper
           modules={[Navigation]}
@@ -66,24 +93,33 @@ const SalesHitsSection = ({ theme, products }: SalesHitsSectionProps) => {
           }}
           className="mySwiper !flex !items-stretch"
         >
-          {hitProducts.map((product) => (
+          {categoryProducts.map((product) => (
             <SwiperSlide key={product.id} className="!h-auto">
               <div className="flex flex-col items-center w-[300px] h-full rounded-[24px] bg-white border border-[#E8E8E8] py-6 px-6">
                 <LocalizedClientLink
                   href={`/products/${product.handle}`}
                   className="flex flex-col h-full"
                 >
-                  <div className="min-w-[252px] h-[200px] bg-[#F0F0F0] rounded-[24px] flex items-center justify-center mb-3 overflow-hidden">
+                  <div className="min-w-[252px] h-[200px] bg-[#F0F0F0] rounded-[24px] flex items-center justify-center mb-3 overflow-hidden relative">
                     <Image
                       src={
-                        product.thumbnail ||
-                        "/pages/moreThanPrintPage/gamePad.png"
+                        product.mid_code
+                          ? `https://img.youtube.com/vi/${product.mid_code}/hqdefault.jpg`
+                          : product.thumbnail ||
+                            "/pages/moreThanPrintPage/gamePad.png"
                       }
                       alt={product.title || ""}
                       width={252}
                       height={200}
                       className="w-full h-full object-cover"
                     />
+                    {product.mid_code && (
+                      <div
+                        className={`${mergedTheme.btnBgColor} w-[40px] h-[40px] pl-[2px] rounded-full flex items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+                      >
+                        <MdArrowForwardIos size={20} color="#FFFFFF" />
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col items-center justify-between flex-grow">
                     <h3 className="text-[20px] w-[258px] text-center font-bold text-[var(--color-dark-blue)] mb-3">
@@ -118,4 +154,4 @@ const SalesHitsSection = ({ theme, products }: SalesHitsSectionProps) => {
   )
 }
 
-export default SalesHitsSection
+export default CategoryProductsSection

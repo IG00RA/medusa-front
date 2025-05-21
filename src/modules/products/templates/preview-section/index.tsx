@@ -36,10 +36,38 @@ const PreviewSection = ({
   const [selectedVariant, setSelectedVariant] = useState<
     HttpTypes.StoreProductVariant | undefined
   >(product.variants?.[0] || undefined)
-  const [activeThumbnail, setActiveThumbnail] = useState<number | null>(1)
+  const [activeThumbnail, setActiveThumbnail] = useState<string | null>(
+    product.mid_code
+      ? `https://img.youtube.com/vi/${product.mid_code}/hqdefault.jpg`
+      : product.thumbnail || null
+  )
   const [isAdding, setIsAdding] = useState(false)
+  const [customColor, setCustomColor] = useState("#E1DFDE")
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isVideoModal, setIsVideoModal] = useState(!!product.mid_code)
+  const [isContentLoaded, setIsContentLoaded] = useState(false)
   const pathname = usePathname()
   const t = useTranslations().specificProduct.previewSection
+
+  // Map product options to colors and associate with images
+  const colors = product.options
+    ?.find((opt) => opt.title?.toLowerCase() === "color")
+    ?.values?.map((val) => ({
+      colorName: val.value,
+      color: val.value === "custom" ? customColor : val.value,
+      image:
+        product.images?.find((img) => img.url.toLowerCase().includes(val.value))
+          ?.url || null,
+    })) || [
+    { colorName: "white", color: "white", image: null },
+    { colorName: "black", color: "black", image: null },
+    { colorName: "blue", color: "blue", image: null },
+    { colorName: "green", color: "green", image: null },
+  ]
+
+  const [activeColor, setActiveColor] = useState(
+    colors[0] || { colorName: "white", color: "white", image: null }
+  )
 
   useEffect(() => {
     if (product.variants?.length && !selectedVariant) {
@@ -49,24 +77,34 @@ const PreviewSection = ({
         colors.find((c) =>
           initialVariant.options?.some((opt) => opt.value === c.colorName)
         ) || colors[0]
-      setActiveColor(initialColor)
+      setActiveColor(
+        initialColor || { colorName: "white", color: "white", image: null }
+      )
+      setActiveThumbnail(
+        product.mid_code
+          ? `https://img.youtube.com/vi/${product.mid_code}/hqdefault.jpg`
+          : initialColor?.image || product.thumbnail || null
+      )
+      setIsVideoModal(!!product.mid_code)
     }
-  }, [product.variants])
+  }, [product.variants, product.thumbnail, product.mid_code])
 
-  // Map Medusa variant options to colors (assuming a "color" option)
-  const colors = product.options
-    ?.find((opt) => opt.title?.toLowerCase() === "color")
-    ?.values?.map((val, i) => ({
-      color: ["#FFFFFF", "#303754", "#4D80E4", "#69C269"][i] || "#FFFFFF",
-      colorName: val.value,
-    })) || [
-    { color: "#FFFFFF", colorName: "White" },
-    { color: "#303754", colorName: "Dark Blue" },
-    { color: "#4D80E4", colorName: "Blue" },
-    { color: "#69C269", colorName: "Green" },
-  ]
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isModalOpen) {
+        setIsModalOpen(false)
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isModalOpen])
 
-  const [activeColor, setActiveColor] = useState(colors[0])
+  useEffect(() => {
+    // Reset loading state when modal opens or content changes
+    if (isModalOpen) {
+      setIsContentLoaded(false)
+    }
+  }, [isModalOpen, activeThumbnail, isVideoModal])
 
   const getLocaleFromPath = (pathname: string): string => {
     const pathSegments = pathname.split("/")
@@ -94,14 +132,32 @@ const PreviewSection = ({
     return category.name || "Category"
   }
 
-  const handleVariantChange = (colorName: string) => {
+  const handleVariantChange = (
+    colorName: string,
+    colorValue: string,
+    image: string | null
+  ) => {
     const variant = product.variants?.find((v) =>
       v.options?.some((opt) => opt.value === colorName)
     )
-    if (variant) {
-      setSelectedVariant(variant)
-      setActiveColor(colors.find((c) => c.colorName === colorName) || colors[0])
+    setSelectedVariant(variant || product.variants?.[0])
+    setActiveColor({ color: colorValue, colorName, image })
+    if (image) {
+      setActiveThumbnail(image)
+      setIsVideoModal(false)
     }
+  }
+
+  const handleThumbnailClick = (url: string) => {
+    setActiveThumbnail(url)
+    setIsVideoModal(false)
+  }
+
+  const handleVideoClick = () => {
+    setActiveThumbnail(
+      `https://img.youtube.com/vi/${product.mid_code}/hqdefault.jpg`
+    )
+    setIsVideoModal(true)
   }
 
   const handleAddToCart = async () => {
@@ -125,12 +181,18 @@ const PreviewSection = ({
     }
   }
 
-  useEffect(() => {
-    console.log("product", product)
-  }, [product])
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      setIsModalOpen(false)
+    }
+  }
+
+  const handleContentLoad = () => {
+    setIsContentLoaded(true)
+  }
 
   const hasPersonalization = product?.tags?.some(
-    (tag) => tag.value === "Personalization"
+    (tag) => tag.value === "personalization"
   )
 
   return (
@@ -164,18 +226,29 @@ const PreviewSection = ({
           {product.title}
         </LocalizedClientLink>
       </nav>
-      <div className="lg:w-[1408px] pb-[32px] mx-auto lg:flex lg:gap-[43px] lg:items-center lg:justify-center border-y-[1px] border-y-[#F5E9D0] lg:py-[48px]">
+      <div className="lg:w-[1408px] pb-[32px] mx-auto lg:flex lg:gap-[43px] lg:items-start lg:justify-center border-y-[1px] border-y-[#F5E9D0] lg:py-[48px]">
         <div>
-          <div className="mb-[16px]"></div>
-          <div className="mx-auto w-[328px] lg:w-[300px] h-[400px] bg-[#F0F0F0] rounded-xl flex items-center justify-center">
-            {product.thumbnail ? (
-              <Image
-                src={product.thumbnail}
-                alt={product.title || "Product"}
-                width={300}
-                height={400}
-                className="object-cover rounded-xl"
-              />
+          <div className="mx-auto w-[328px] lg:w-[300px] h-[400px] bg-[#F0F0F0] rounded-xl flex items-center justify-center overflow-hidden relative">
+            {activeThumbnail ? (
+              <div
+                className="w-full h-full cursor-pointer"
+                onClick={() => setIsModalOpen(true)}
+              >
+                <Image
+                  src={activeThumbnail}
+                  alt={product.title || "Product"}
+                  width={300}
+                  height={400}
+                  className="w-full h-full object-cover rounded-xl"
+                />
+                {isVideoModal && product.mid_code && (
+                  <div
+                    className={`${theme.btnBgColor} w-[80px] h-[80px] pl-[6px] rounded-full flex items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-[50%]`}
+                  >
+                    <IoPlaySharp size={40} color="#FFFFFF" />
+                  </div>
+                )}
+              </div>
             ) : (
               <div
                 className={`${theme.btnBgColor} w-[80px] h-[80px] pl-[6px] rounded-full flex items-center justify-center`}
@@ -184,26 +257,52 @@ const PreviewSection = ({
               </div>
             )}
           </div>
-          <div className="w-[328px] flex gap-[20px] justify-center mt-[12px] mb-[24px] mx-auto">
-            {(product.images || []).slice(0, 4).map((img, i) => (
-              <div
-                key={i}
-                className={`w-[60px] h-[60px] bg-[#F0F0F0] rounded cursor-pointer border-2 ${
-                  activeThumbnail === i + 1
-                    ? theme.borderColor
-                    : "border-transparent"
-                }`}
-                onClick={() => setActiveThumbnail(i + 1)}
-              >
-                <Image
-                  src={img.url}
-                  alt={`Thumbnail ${i + 1}`}
-                  width={60}
-                  height={60}
-                  className="object-cover rounded"
-                />
-              </div>
-            ))}
+          <div className="w-[328px] mt-[12px] mb-[24px] mx-auto overflow-x-auto">
+            <div className="flex gap-[20px] flex-nowrap snap-x snap-mandatory">
+              {product.mid_code && (
+                <div
+                  className={`w-[60px] h-[60px] bg-[#F0F0F0] flex justify-center rounded cursor-pointer border-2 overflow-hidden relative flex-shrink-0 ${
+                    activeThumbnail ===
+                    `https://img.youtube.com/vi/${product.mid_code}/hqdefault.jpg`
+                      ? theme.borderColor
+                      : "border-transparent"
+                  }`}
+                  onClick={handleVideoClick}
+                >
+                  <Image
+                    src={`https://img.youtube.com/vi/${product.mid_code}/hqdefault.jpg`}
+                    alt="Video Thumbnail"
+                    width={60}
+                    height={60}
+                    className="w-full h-full object-cover rounded"
+                  />
+                  <div
+                    className={`${theme.btnBgColor} w-[20px] h-[20px] rounded-full flex items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-[50%]`}
+                  >
+                    <IoPlaySharp size={12} color="#FFFFFF" />
+                  </div>
+                </div>
+              )}
+              {(product.images || []).map((img, i) => (
+                <div
+                  key={i}
+                  className={`w-[60px] h-[60px] bg-[#F0F0F0] rounded cursor-pointer border-2 overflow-hidden flex-shrink-0 ${
+                    activeThumbnail === img.url
+                      ? theme.borderColor
+                      : "border-transparent"
+                  }`}
+                  onClick={() => handleThumbnailClick(img.url)}
+                >
+                  <Image
+                    src={img.url}
+                    alt={`Thumbnail ${i + 1}`}
+                    width={60}
+                    height={60}
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="lg:flex lg:gap-[24px] lg:items-end">
@@ -252,27 +351,41 @@ const PreviewSection = ({
               <h3 className="font-bold text-[16px] mb-[12px] text-[var(--color-dark-blue)]">
                 {t.colorTitle}
               </h3>
-              <div className="flex space-x-2 items-center">
-                {colors.map((c, i) => (
-                  <span
-                    key={i}
-                    onClick={() => handleVariantChange(c.colorName)}
-                    className={`w-[30px] h-[30px] rounded-full cursor-pointer border-2 ${
-                      activeColor.color === c.color
-                        ? theme.borderColor
-                        : "border-transparent"
-                    }`}
-                    style={{ backgroundColor: c.color }}
-                  />
-                ))}
+              <div className="flex gap-2 items-center">
+                {colors
+                  .filter((c) => c.colorName !== "custom")
+                  .map((c, i) => (
+                    <span
+                      key={i}
+                      onClick={() =>
+                        handleVariantChange(c.colorName, c.color, c.image)
+                      }
+                      className={`w-[30px] h-[30px] shrink-0 rounded-full cursor-pointer border-2 ${
+                        activeColor.colorName === c.colorName
+                          ? theme.borderColor
+                          : ""
+                      }`}
+                      style={{ backgroundColor: c.color }}
+                    />
+                  ))}
               </div>
             </div>
-            <div className="mt-[16px] mb-[32px] flex gap-[8px] items-center">
+            <div className="mt-[16px] mb-[32px] flex gap-[8px] items-center relative">
               <h3 className="font-bold text-[16px] text-[var(--color-dark-blue)]">
                 {t.chooseColorTitle}
               </h3>
-              <span
-                className={`w-[30px] h-[30px] rounded-full cursor-pointer bg-[#E1DFDE]`}
+              <input
+                type="color"
+                value={customColor}
+                onChange={(e) => {
+                  setCustomColor(e.target.value)
+                  handleVariantChange("custom", e.target.value, null)
+                }}
+                className={`w-[30px] h-[30px] rounded-full cursor-pointer border-2 appearance-none [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-none ${
+                  activeColor.colorName === "custom"
+                    ? theme.borderColor
+                    : "border-transparent"
+                }`}
               />
             </div>
             <div className="mt-4">
@@ -294,16 +407,61 @@ const PreviewSection = ({
                 </select>
                 <button
                   onClick={handleAddToCart}
-                  className={`${theme.btnBgColor} text-white px-[80px] py-[14.5px] rounded-xl text-[18px] font-semibold disabled:opacity-50`}
+                  className={`${theme.btnBgColor} text-white px-[80px] py-[14.5px] cursor-pointer rounded-xl text-[18px] font-semibold disabled:opacity-50`}
                   disabled={isAdding || !selectedVariant}
                 >
-                  {isAdding ? "Adding..." : t.btnBuy}
+                  {isAdding ? "..." : t.btnBuy}
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {isModalOpen && activeThumbnail && (
+        <div
+          className="fixed inset-0 custom-overlay bg-opacity-25 flex items-center justify-center z-50"
+          onClick={handleOverlayClick}
+        >
+          <div className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
+            {!isContentLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+              </div>
+            )}
+            {isContentLoaded && (
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 text-white text-2xl font-bold p-1 pl-2 pr-2 rounded-full border border-white bg-zinc-600"
+              >
+                ×
+              </button>
+            )}
+            {isVideoModal && product.mid_code ? (
+              <iframe
+                width="800"
+                height="450"
+                src={`https://www.youtube.com/embed/${product.mid_code}?autoplay=1`}
+                title="Product Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-[80vw] h-[60vh] rounded-xl"
+                onLoad={handleContentLoad}
+              />
+            ) : (
+              <Image
+                src={activeThumbnail}
+                alt="Full-screen product image"
+                width={1200}
+                height={800}
+                className="w-full h-full object-contain"
+                onLoad={handleContentLoad}
+              />
+            )}
+          </div>
+        </div>
+      )}
     </section>
   )
 }

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 const BACKEND_URL = process.env.MEDUSA_BACKEND_URL
 const PUBLISHABLE_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
-const locales = ["ua", "sk", "en", "pl", "cz"]
+const locales = ["ua", "sk", "us", "pl", "cz"]
 const defaultLocale = "ua"
 
 const regionMapCache = {

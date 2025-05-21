@@ -25,6 +25,7 @@
   --color-neutral-400: oklch(70.8% 0 0);
   --color-neutral-500: oklch(55.6% 0 0);
   --color-neutral-600: oklch(43.9% 0 0);
+  --color-overlay: oklch(0.38 0.01 260.26 / 0.68);
   --color-black: #000;
   --color-white: #fff;
   --spacing: 0.25rem;
@@ -2479,4 +2480,8 @@ input[type="number"]::-webkit-outer-spin-button {
   & svg {
     fill: #888888 !important;
   }
+}
+
+.custom-overlay {
+  background-color: rgba(30, 30, 30, 0.6);
 }
