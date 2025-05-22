@@ -256,6 +256,9 @@ interface LocalizationData {
       }
     }
     salesHits: {
+      notFound: string
+      parameter: string
+      view: string
       title: string
       btn: string
       firstItem: {

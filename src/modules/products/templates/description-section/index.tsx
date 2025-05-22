@@ -34,7 +34,7 @@ const DescriptionSection = ({
   const t = useTranslations().specificProduct.descriptionSection
   const tSec = useTranslations().specificProduct.previewSection
   const hasPersonalization = product?.tags?.some(
-    (tag) => tag.value === "personalization"
+    (tag) => tag.value === "personalized"
   )
 
   const data = {

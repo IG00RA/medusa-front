@@ -67,7 +67,12 @@ const SalesHitsSection = ({ theme, products }: SalesHitsSectionProps) => {
         >
           {hitProducts.map((product) => (
             <SwiperSlide key={product.id} className="!h-auto">
-              <div className="flex flex-col items-center w-[300px] h-full rounded-[24px] bg-white border border-[#E8E8E8] py-6 px-6">
+              <div
+                style={{
+                  boxShadow: "0px 16px 40px 0px rgba(32, 47, 75, 0.06)",
+                }}
+                className="flex flex-col items-center w-[300px] h-full rounded-[24px] bg-white border border-[#E8E8E8] py-6 px-6"
+              >
                 <LocalizedClientLink
                   href={`/products/${product.handle}`}
                   className="flex flex-col h-full"

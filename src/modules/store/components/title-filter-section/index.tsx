@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { HiMiniMagnifyingGlass } from "react-icons/hi2"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { SortOptions } from "@lib/data/products"
 import { useTranslations } from "@/lib/localization"
+import { debounce } from "lodash"
 
 interface TitleFilterSectionProps {
   theme: {
@@ -25,7 +26,7 @@ interface TitleFilterSectionProps {
 
 const TitleFilterSection = ({
   theme,
-  searchQuery,
+  searchQuery: initialSearchQuery,
   onSearchChange,
   activeFilter,
   onFilterChange,
@@ -37,14 +38,35 @@ const TitleFilterSection = ({
   const t = useTranslations().product.filtersSection
   const [minPrice, setMinPrice] = useState<number>(priceRange.min)
   const [maxPrice, setMaxPrice] = useState<number>(priceRange.max)
+  const [localSearchQuery, setLocalSearchQuery] =
+    useState<string>(initialSearchQuery)
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  const currentSortBy = searchParams.get("sortBy") as SortOptions | null
+
+  const debouncedSearch = useCallback(
+    debounce((query: string) => {
+      onSearchChange(query)
+      router.push(`${pathname}?${createQueryString({ query })}`)
+    }, 300),
+    [onSearchChange, router, pathname]
+  )
+
+  const handleSearch = (query: string) => {
+    setLocalSearchQuery(query)
+    debouncedSearch(query)
+  }
 
   useEffect(() => {
     setMinPrice(priceRange.min)
     setMaxPrice(priceRange.max)
   }, [priceRange])
+
+  useEffect(() => {
+    setLocalSearchQuery(initialSearchQuery)
+  }, [initialSearchQuery])
 
   const filters: {
     label: string
@@ -57,39 +79,39 @@ const TitleFilterSection = ({
     { label: t.sortingFilters.fifthItem, value: "personalized" },
   ]
 
-  const createQueryString = (name: string, value: string) => {
-    const params = new URLSearchParams(searchParams)
-    params.set(name, value)
-    return params.toString()
+  const createQueryString = (params: Record<string, string>) => {
+    const newParams = new URLSearchParams(searchParams)
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) {
+        newParams.set(key, value)
+      } else {
+        newParams.delete(key)
+      }
+    })
+    return newParams.toString()
   }
 
   const handleApplyPriceFilter = () => {
     onPriceRangeChange(minPrice, maxPrice)
     router.push(
-      `${pathname}?${createQueryString(
-        "minPrice",
-        minPrice.toString()
-      )}&${createQueryString("maxPrice", maxPrice.toString())}`
+      `${pathname}?${createQueryString({
+        minPrice: minPrice.toString(),
+        maxPrice: maxPrice.toString(),
+      })}`
     )
-  }
-
-  const handleSearch = (query: string) => {
-    onSearchChange(query)
-    router.push(`${pathname}?${createQueryString("query", query)}`)
   }
 
   const handleFilter = (index: number) => {
     onFilterChange(index)
     const sortValue = filters[index].value
-    if (["price_asc", "price_desc", "created_at"].includes(sortValue)) {
-      router.push(`${pathname}?${createQueryString("sortBy", sortValue)}`)
-    } else {
-      router.push(`${pathname}?${createQueryString("filter", sortValue)}`)
-    }
+    router.push(`${pathname}?${createQueryString({ sortBy: sortValue })}`)
   }
 
   const handleReset = () => {
     onResetFilters()
+    setLocalSearchQuery("")
+    setMinPrice(0)
+    setMaxPrice(0)
     router.push(pathname)
   }
 
@@ -119,7 +141,7 @@ const TitleFilterSection = ({
             type="text"
             className="color-[#A7A7A7] text-[18px] focus:outline-none w-full"
             placeholder={t.placeholderInput}
-            value={searchQuery}
+            value={localSearchQuery}
             onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
@@ -136,7 +158,7 @@ const TitleFilterSection = ({
               className={`flex items-center justify-center py-[14.5px] lg:py-[10px] px-[24px] h-[56px] text-[18px] rounded-xl lg:rounded-[24px] cursor-pointer border ${
                 theme.borderColor
               } ${
-                activeFilter === idx
+                currentSortBy === item.value
                   ? `${theme.btnBgColor} text-white border-[${theme.mainColor}]`
                   : `${theme.borderColor} text-black bg-[#ffffff]`
               }`}

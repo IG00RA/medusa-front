@@ -253,6 +253,9 @@
       }
     },
     "salesHits": {
+      "parameter": "Try changing the filter parameters",
+      "notFound": "Sorry, no products found",
+      "view": "You viewed:",
       "title": "Best Sellers",
       "btn": "Buy",
       "firstItem": {

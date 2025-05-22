@@ -192,7 +192,7 @@ const PreviewSection = ({
   }
 
   const hasPersonalization = product?.tags?.some(
-    (tag) => tag.value === "personalization"
+    (tag) => tag.value === "personalized"
   )
 
   return (

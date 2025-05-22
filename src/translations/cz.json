@@ -253,6 +253,9 @@
       }
     },
     "salesHits": {
+      "parameter": "Zkuste změnit parametry filtrování",
+      "notFound": "Bohužel nebyly nalezeny žádné produkty",
+      "view": "Zobrazili jste:",
       "title": "Prodejní hity",
       "btn": "Koupit",
       "firstItem": {

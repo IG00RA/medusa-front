@@ -253,6 +253,9 @@
       }
     },
     "salesHits": {
+      "parameter": "Spróbuj zmienić parametry filtrowania",
+      "notFound": "Niestety, nie znaleziono żadnych produktów",
+      "view": "Przeglądałeś:",
       "title": "Bestsellery",
       "btn": "Kup",
       "firstItem": {

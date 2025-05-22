@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { Metadata } from "next"
 import { useTranslations } from "@/lib/localization"
 import CategorySelector from "../components/category-selector"
@@ -9,6 +8,7 @@ import TitleFilterSection from "../components/title-filter-section"
 import ProductListSection from "../components/product-list-section"
 import SalesHitsSection from "@/modules/products/templates/sales-hits-section"
 import { HttpTypes } from "@medusajs/types"
+import { SortOptions } from "@/lib/data/products"
 
 export const metadata: Metadata = {
   title: "Store",
@@ -33,6 +33,7 @@ export default function StoreTemplate({
     minPrice?: string
     maxPrice?: string
     query?: string
+    filter?: string
   }
 }) {
   const t = useTranslations().product

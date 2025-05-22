@@ -1,10 +1,12 @@
 import { Metadata } from "next"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import StoreTemplate from "@modules/store/templates"
-import { listProductsWithSort } from "@lib/data/products"
+import {
+  ExtendedStoreProductParams,
+  listProductsWithSort,
+  SortOptions,
+} from "@lib/data/products"
 import { listCategories } from "@lib/data/categories"
 import { getRegion } from "@lib/data/regions"
-import { HttpTypes } from "@medusajs/types"
 
 export const metadata: Metadata = {
   title: "Store",
@@ -19,6 +21,7 @@ type Params = {
     minPrice?: string
     maxPrice?: string
     query?: string
+    filter?: string
   }>
   params: Promise<{
     countryCode: string
@@ -30,26 +33,20 @@ export default async function StorePage(props: Params) {
   const params = await props.params
   const searchParams = await props.searchParams
   const { countryCode } = params
-  const { sortBy, page, category } = searchParams
+  const { sortBy, page, category, minPrice, maxPrice, query } = searchParams
 
   const regionData = await getRegion(countryCode || "ua")
   const product_categories = await listCategories()
   const pageNumber = page ? parseInt(page) : 1
 
-  const queryParams: HttpTypes.FindParams & HttpTypes.StoreProductParams = {
+  const queryParams: ExtendedStoreProductParams = {
     limit: 12,
     region_id: regionData?.id,
   }
 
-  let order: string | undefined
-  if (sortBy === "created_at") {
-    order = "created_at"
-  } else if (sortBy === "price_asc" || sortBy === "price_desc") {
-    order = sortBy
-  }
-
-  if (order) {
-    queryParams["order"] = order
+  let tags: string[] | undefined
+  if (sortBy === "popular" || sortBy === "new" || sortBy === "personalized") {
+    tags = [sortBy]
   }
 
   const {
@@ -57,8 +54,13 @@ export default async function StorePage(props: Params) {
   } = await listProductsWithSort({
     page: pageNumber,
     queryParams,
-    sortBy,
+    sortBy: sortBy as SortOptions,
     countryCode,
+    searchQuery: query,
+    minPrice: minPrice ? parseInt(minPrice) : undefined,
+    maxPrice: maxPrice ? parseInt(maxPrice) : undefined,
+    category,
+    tags,
   })
 
   return (

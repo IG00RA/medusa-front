@@ -253,6 +253,9 @@
       }
     },
     "salesHits": {
+      "parameter": "Skúste zmeniť parametre filtrovania",
+      "notFound": "Žiaľ, nenašli sa žiadne produkty",
+      "view": "Zobrazili ste:",
       "title": "Najpredávanejšie",
       "btn": "Kúpiť",
       "firstItem": {

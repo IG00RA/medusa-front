@@ -3,9 +3,23 @@
 import { sdk } from "@lib/config"
 import { sortProducts } from "@lib/util/sort-products"
 import { HttpTypes } from "@medusajs/types"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { getRegion, retrieveRegion } from "./regions"
+import { getProductPrice } from "../util/get-product-price"
+
+export type SortOptions =
+  | "created_at"
+  | "price_asc"
+  | "price_desc"
+  | "popular"
+  | "new"
+  | "personalized"
+
+export interface ExtendedStoreProductParams
+  extends HttpTypes.FindParams,
+    HttpTypes.StoreProductParams {
+  q?: string
+}
 
 export const listProducts = async ({
   pageParam = 1,
@@ -86,50 +100,126 @@ export const listProducts = async ({
     })
 }
 
-/**
- * This will fetch 100 products to the Next.js cache and sort them based on the sortBy parameter.
- * It will then return the paginated products based on the page and limit parameters.
- */
 export const listProductsWithSort = async ({
   page = 0,
   queryParams,
   sortBy = "created_at",
   countryCode,
+  searchQuery,
+  minPrice,
+  maxPrice,
+  category,
+  tags,
 }: {
   page?: number
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: ExtendedStoreProductParams
   sortBy?: SortOptions
   countryCode: string
+  searchQuery?: string
+  minPrice?: number
+  maxPrice?: number
+  category?: string
+  tags?: string[]
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
   nextPage: number | null
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: ExtendedStoreProductParams
 }> => {
   const limit = queryParams?.limit || 12
 
-  const {
-    response: { products, count },
-  } = await listProducts({
-    pageParam: 0,
-    queryParams: {
-      ...queryParams,
-      limit: 100,
-    },
-    countryCode,
+  const region = await getRegion(countryCode)
+  if (!region) {
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+      queryParams,
+    }
+  }
+
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+
+  const next = {
+    ...(await getCacheOptions("products")),
+  }
+
+  const query: ExtendedStoreProductParams = {
+    limit,
+    offset: (page - 1) * limit,
+    region_id: region.id,
+    fields:
+      "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags,+categories",
+    ...queryParams,
+  }
+
+  // Додавання пошуку за назвою
+  if (searchQuery) {
+    query.q = searchQuery
+  }
+
+  const { products, count } = await sdk.client.fetch<{
+    products: HttpTypes.StoreProduct[]
+    count: number
+  }>(`/store/products`, {
+    method: "GET",
+    query,
+    headers,
+    next,
+    cache: "no-store",
   })
 
-  const sortedProducts = sortProducts(products, sortBy)
+  // Клієнтська фільтрація
+  let filteredProducts = products
 
-  const pageParam = (page - 1) * limit
+  // Фільтрація за тегами
+  if (tags && tags.length > 0) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.tags?.some((tag) => tags.includes(tag.value))
+    )
+  }
 
-  const nextPage = count > pageParam + limit ? pageParam + limit : null
+  // Фільтрація за категорією
+  if (category) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.categories?.some((cat) => cat.handle === category)
+    )
+  }
 
-  const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
+  // Фільтрація за ціною
+  if (minPrice !== undefined || maxPrice !== undefined) {
+    filteredProducts = filteredProducts.filter((product) => {
+      const { cheapestPrice } = getProductPrice({ product })
+      const price = cheapestPrice?.calculated_price_number ?? 0
+      return (
+        (minPrice === undefined || price >= minPrice) &&
+        (maxPrice === undefined || price <= maxPrice)
+      )
+    })
+  }
+
+  const nextPage = count > (page - 1) * limit + limit ? page + 1 : null
+
+  // Сортування на клієнтській стороні
+  let sortedProducts = filteredProducts
+  if (
+    sortBy === "popular" ||
+    sortBy === "new" ||
+    sortBy === "personalized" ||
+    sortBy === "created_at" ||
+    sortBy === "price_asc" ||
+    sortBy === "price_desc"
+  ) {
+    sortedProducts = sortProducts(filteredProducts, sortBy)
+  }
+
+  // Обмеження кількості товарів на сторінці
+  const paginatedProducts = sortedProducts.slice(0, limit)
 
   return {
     response: {
       products: paginatedProducts,
-      count,
+      count: filteredProducts.length,
     },
     nextPage,
     queryParams,
