@@ -30,6 +30,8 @@ export default async function ProductTemplate({
     borderColor: "border-[#f0ad4e]",
   }
 
+  console.log("countryCode1", countryCode)
+
   const products = await listProducts({
     countryCode,
   }).then(({ response }) =>

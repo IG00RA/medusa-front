@@ -1,8 +1,11 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { sdk } from "@lib/config"
+import { getRegion } from "@lib/data/regions"
+import { listRegions } from "@lib/data/regions"
 import { listProducts } from "@lib/data/products"
-import { getRegion, listRegions } from "@lib/data/regions"
 import ProductTemplate from "@modules/products/templates"
+import { HttpTypes } from "@medusajs/types"
 
 type Props = {
   params: Promise<{ countryCode: string; handle: string }>
@@ -52,17 +55,27 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const { handle } = params
-  const region = await getRegion(params.countryCode)
+  const { handle, countryCode } = params
+  const region = await getRegion(countryCode)
 
   if (!region) {
     notFound()
   }
 
-  const product = await listProducts({
-    countryCode: params.countryCode,
-    queryParams: { handle },
-  }).then(({ response }) => response.products[0])
+  // Fetch product by handle using sdk.client.fetch
+  const { product } = await sdk.client
+    .fetch<{ product: HttpTypes.StoreProduct }>(`/store/products/${handle}`, {
+      query: {
+        region_id: region.id,
+        fields: "id,title,handle,thumbnail,description",
+      },
+      headers: {
+        "x-publishable-key":
+          process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "",
+      },
+      cache: "no-store",
+    })
+    .catch(() => ({ product: null }))
 
   if (!product) {
     notFound()
@@ -81,16 +94,28 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function ProductPage(props: Props) {
   const params = await props.params
-  const region = await getRegion(params.countryCode)
+  const { countryCode, handle } = params
+  const region = await getRegion(countryCode)
 
   if (!region) {
     notFound()
   }
 
-  const pricedProduct = await listProducts({
-    countryCode: params.countryCode,
-    queryParams: { handle: params.handle },
-  }).then(({ response }) => response.products[0])
+  // Fetch product by handle using sdk.client.fetch
+  const { product: pricedProduct } = await sdk.client
+    .fetch<{ product: HttpTypes.StoreProduct }>(`/store/products/${handle}`, {
+      query: {
+        region_id: region.id,
+        fields:
+          "id,title,handle,thumbnail,description,*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags",
+      },
+      headers: {
+        "x-publishable-key":
+          process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "",
+      },
+      cache: "no-store",
+    })
+    .catch(() => ({ product: null }))
 
   if (!pricedProduct) {
     notFound()
@@ -100,7 +125,7 @@ export default async function ProductPage(props: Props) {
     <ProductTemplate
       product={pricedProduct}
       region={region}
-      countryCode={params.countryCode}
+      countryCode={countryCode}
     />
   )
 }

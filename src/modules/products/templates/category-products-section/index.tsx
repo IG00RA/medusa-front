@@ -10,8 +10,6 @@ import { Navigation } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
 import ProductPrice from "../../components/product-price"
-import { useEffect } from "react"
-import { usePathname } from "next/navigation"
 
 interface CategoryProductsSectionProps {
   theme: {
@@ -42,9 +40,6 @@ const CategoryProductsSection = ({
     borderColor: "border-[var(--color-main-blue)]",
   }
 
-  const pathname = usePathname()
-
-  const t = useTranslations().moreThanPrint.salesHits
   const tSec = useTranslations().specificProduct.previewSection
 
   const mergedTheme = { ...defaultTheme, ...theme }
@@ -52,27 +47,6 @@ const CategoryProductsSection = ({
   const categoryProducts = products.filter((product) =>
     selectedCategory?.products?.some((p) => p.id === product.id)
   )
-
-  const getLocaleFromPath = (pathname: string): string => {
-    const pathSegments = pathname.split("/")
-    return pathSegments[1] || "ua"
-  }
-
-  const getLocalizedCategoryName = (
-    category: HttpTypes.StoreProductCategory | undefined
-  ): string => {
-    if (!category) {
-      return t.title || "Category Products"
-    }
-    const currentLocale = getLocaleFromPath(pathname || "ua")
-    if (
-      category.metadata &&
-      typeof category.metadata[currentLocale] === "string"
-    ) {
-      return category.metadata[currentLocale] as string
-    }
-    return category.name || "Category Products"
-  }
 
   return (
     <section className="py-[16px] px-[16px] lg:py-[24px] bg-[#F9F9F9] relative">
@@ -103,23 +77,14 @@ const CategoryProductsSection = ({
                   <div className="min-w-[252px] h-[200px] bg-[#F0F0F0] rounded-[24px] flex items-center justify-center mb-3 overflow-hidden relative">
                     <Image
                       src={
-                        product.mid_code
-                          ? `https://img.youtube.com/vi/${product.mid_code}/hqdefault.jpg`
-                          : product.thumbnail ||
-                            "/pages/moreThanPrintPage/gamePad.png"
+                        product.thumbnail ||
+                        "/pages/moreThanPrintPage/gamePad.png"
                       }
                       alt={product.title || ""}
                       width={252}
                       height={200}
                       className="w-full h-full object-cover"
                     />
-                    {product.mid_code && (
-                      <div
-                        className={`${mergedTheme.btnBgColor} w-[40px] h-[40px] pl-[2px] rounded-full flex items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
-                      >
-                        <MdArrowForwardIos size={20} color="#FFFFFF" />
-                      </div>
-                    )}
                   </div>
                   <div className="flex flex-col items-center justify-between flex-grow">
                     <h3 className="text-[20px] w-[258px] text-center font-bold text-[var(--color-dark-blue)] mb-3">
