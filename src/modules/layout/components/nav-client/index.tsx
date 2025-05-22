@@ -23,6 +23,8 @@ export default function NavClient({
 
   const t = useTranslations().header
 
+  console.log("categories", categories)
+
   return (
     <div className="sticky top-0 inset-x-0 z-50">
       <header className="bg-lighter-blue relative">
@@ -44,18 +46,6 @@ export default function NavClient({
                 {category.name}
               </LocalizedClientLink>
             ))}
-            {/* <LocalizedClientLink href="/categories/development">
-              {t.navigation.development}
-            </LocalizedClientLink>
-            <LocalizedClientLink href="/categories/games">
-              {t.navigation.games}
-            </LocalizedClientLink>
-            <LocalizedClientLink href="/categories/accessories">
-              {t.navigation.accessories}
-            </LocalizedClientLink>
-            <LocalizedClientLink href="/categories/decorations">
-              {t.navigation.decorations}
-            </LocalizedClientLink> */}
             <LocalizedClientLink
               href="/custom"
               className="font-bold text-main-blue"

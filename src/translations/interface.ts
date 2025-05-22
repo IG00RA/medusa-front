@@ -310,6 +310,7 @@ interface LocalizationData {
     }
 
     filtersSection: {
+      catalog: string
       title: string
       navigationFirstItem: string
       navigationSecondItem: string

@@ -6,6 +6,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { SortOptions } from "@lib/data/products"
 import { useTranslations } from "@/lib/localization"
 import { debounce } from "lodash"
+import LocalizedClientLink from "@/modules/common/components/localized-client-link"
 
 interface TitleFilterSectionProps {
   theme: {
@@ -119,15 +120,15 @@ const TitleFilterSection = ({
     <section className={`mx-auto px-[16px] pb-[48px] ${theme.bgColor}`}>
       <div className="mb-[16px] lg:w-[1408px] mx-auto">
         <h1 className="text-[#444444] text-[24px] font-semibold mb-[14px]">
-          {t.title}
+          {t.catalog}
         </h1>
         <div
           className={`w-[100px] h-[3px] bg-[${theme.mainColor}] mb-[28px]`}
         ></div>
         <nav className="flex gap-[24px] items-center text-[16px] text-[#A7A7A7] mb-[28px]">
-          <span>{t.navigationFirstItem}</span>
-          <span className="text-[#444444]">{">"}</span>
-          <span className="text-[#444444]">{t.navigationSecondItem}</span>
+          <LocalizedClientLink href="/" className="hover:text-[#444444]">
+            {t.navigationFirstItem}
+          </LocalizedClientLink>
         </nav>
         <p className="text-[16px] text-[#444444]">{t.description}</p>
       </div>

@@ -62,9 +62,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     notFound()
   }
 
-  // Fetch product by handle using sdk.client.fetch
-  const { product } = await sdk.client
-    .fetch<{ product: HttpTypes.StoreProduct }>(`/store/products/${handle}`, {
+  // Fetch product by handle with detailed error logging
+  try {
+    const { product } = await sdk.client.fetch<{
+      product: HttpTypes.StoreProduct
+    }>(`/store/products/${handle}`, {
       query: {
         region_id: region.id,
         fields: "id,title,handle,thumbnail,description",
@@ -75,20 +77,30 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       },
       cache: "no-store",
     })
-    .catch(() => ({ product: null }))
 
-  if (!product) {
-    notFound()
-  }
+    if (!product) {
+      console.log(
+        `Product not found for handle: ${handle}, region: ${region.id}`
+      )
+      notFound()
+    }
 
-  return {
-    title: `${product.title} | Medusa Store`,
-    description: `${product.title}`,
-    openGraph: {
+    return {
       title: `${product.title} | Medusa Store`,
       description: `${product.title}`,
-      images: product.thumbnail ? [product.thumbnail] : [],
-    },
+      openGraph: {
+        title: `${product.title} | Medusa Store`,
+        description: `${product.title}`,
+        images: product.thumbnail ? [product.thumbnail] : [],
+      },
+    }
+  } catch (error) {
+    console.error(
+      `Failed to fetch product for handle: ${handle}, region: ${
+        region.id
+      }, error: ${error instanceof Error ? error.message : "Unknown error"}`
+    )
+    notFound()
   }
 }
 
@@ -96,14 +108,19 @@ export default async function ProductPage(props: Props) {
   const params = await props.params
   const { countryCode, handle } = params
   const region = await getRegion(countryCode)
+  console.log(
+    `Fetching product - handle: ${handle}, countryCode: ${countryCode}, regionId: ${region?.id}`
+  )
 
   if (!region) {
+    console.log(`Region not found for countryCode: ${countryCode}`)
     notFound()
   }
 
-  // Fetch product by handle using sdk.client.fetch
-  const { product: pricedProduct } = await sdk.client
-    .fetch<{ product: HttpTypes.StoreProduct }>(`/store/products/${handle}`, {
+  try {
+    const { product: pricedProduct } = await sdk.client.fetch<{
+      product: HttpTypes.StoreProduct
+    }>(`/store/products/${handle}`, {
       query: {
         region_id: region.id,
         fields:
@@ -115,17 +132,28 @@ export default async function ProductPage(props: Props) {
       },
       cache: "no-store",
     })
-    .catch(() => ({ product: null }))
 
-  if (!pricedProduct) {
+    if (!pricedProduct) {
+      console.log(
+        `Product not found for handle: ${handle}, region: ${region.id}`
+      )
+      notFound()
+    }
+
+    console.log(`Product fetched successfully: ${pricedProduct.title}`)
+    return (
+      <ProductTemplate
+        product={pricedProduct}
+        region={region}
+        countryCode={countryCode}
+      />
+    )
+  } catch (error) {
+    console.error(
+      `Failed to fetch product for handle: ${handle}, region: ${
+        region.id
+      }, error: ${error instanceof Error ? error.message : "Unknown error"}`
+    )
     notFound()
   }
-
-  return (
-    <ProductTemplate
-      product={pricedProduct}
-      region={region}
-      countryCode={countryCode}
-    />
-  )
 }
