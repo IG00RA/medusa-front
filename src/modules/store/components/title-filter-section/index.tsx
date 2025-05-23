@@ -4,9 +4,10 @@ import { useState, useEffect, useCallback } from "react"
 import { HiMiniMagnifyingGlass } from "react-icons/hi2"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { SortOptions } from "@lib/data/products"
-import { useTranslations } from "@/lib/localization"
+import { useLocale, useTranslations } from "@/lib/localization"
 import { debounce } from "lodash"
 import LocalizedClientLink from "@/modules/common/components/localized-client-link"
+import { HttpTypes } from "@medusajs/types"
 
 interface TitleFilterSectionProps {
   theme: {
@@ -21,6 +22,7 @@ interface TitleFilterSectionProps {
   onPriceRangeChange: (min: number, max: number) => void
   onResetFilters: () => void
   foundItemsCount: number
+  category: HttpTypes.StoreProductCategory | null
 }
 
 const TitleFilterSection = ({
@@ -31,8 +33,10 @@ const TitleFilterSection = ({
   onPriceRangeChange,
   onResetFilters,
   foundItemsCount,
+  category,
 }: TitleFilterSectionProps) => {
   const t = useTranslations().product.filtersSection
+  const locale = useLocale()
   const [minPrice, setMinPrice] = useState<number>(priceRange.min)
   const [maxPrice, setMaxPrice] = useState<number>(priceRange.max)
   const [localSearchQuery, setLocalSearchQuery] =
@@ -42,6 +46,16 @@ const TitleFilterSection = ({
   const searchParams = useSearchParams()
 
   const currentSortBy = searchParams.get("sortBy") as SortOptions | null
+
+  // Function to get localized category name
+  const getCategoryName = (
+    category: HttpTypes.StoreProductCategory
+  ): string => {
+    if (category.metadata && category.metadata[locale]) {
+      return category.metadata[locale] as string
+    }
+    return category.name
+  }
 
   const debouncedSearch = useCallback(
     debounce((query: string) => {
@@ -111,21 +125,50 @@ const TitleFilterSection = ({
     router.push(pathname)
   }
 
+  // Determine breadcrumb links
+  const isStorePage = pathname.endsWith("/store")
+  const breadcrumbLinks = [
+    {
+      label: t.navigationFirstItem, // "Home"
+      href: "/",
+    },
+  ]
+
+  // Add category or subcategory link if not on store page
+  if (!isStorePage && category) {
+    breadcrumbLinks.push({
+      label: getCategoryName(category),
+      href: `/categories/${category.handle}`,
+    })
+  }
+
   return (
     <section className={`mx-auto px-[16px] pb-[48px] ${theme.bgColor}`}>
       <div className="mb-[16px] lg:w-[1408px] mx-auto">
         <h1 className="text-[#444444] text-[24px] font-semibold mb-[14px]">
-          {t.catalog}
+          {category ? getCategoryName(category) : t.catalog}
         </h1>
         <div
           className={`w-[100px] h-[3px] bg-[${theme.mainColor}] mb-[28px]`}
         ></div>
-        <nav className="flex gap-[24px] items-center text-[16px] text-[#A7A7A7] mb-[28px]">
-          <LocalizedClientLink href="/" className="hover:text-[#444444]">
-            {t.navigationFirstItem}
-          </LocalizedClientLink>
+        <nav className="flex gap-[8px] items-center text-[16px] text-[#A7A7A7] mb-[28px]">
+          {breadcrumbLinks.map((link, idx) => (
+            <div key={idx} className="flex items-center gap-[8px]">
+              <LocalizedClientLink
+                href={link.href}
+                className="hover:text-[#444444]"
+              >
+                {link.label}
+              </LocalizedClientLink>
+              {idx < breadcrumbLinks.length - 1 && <span>&gt;</span>}
+            </div>
+          ))}
         </nav>
-        <p className="text-[16px] text-[#444444]">{t.description}</p>
+        <p className="text-[16px] text-[#444444] line-clamp-3">
+          {category && category.description
+            ? category.description
+            : t.description}
+        </p>
       </div>
 
       <div className="lg:w-[1408px] mx-auto">

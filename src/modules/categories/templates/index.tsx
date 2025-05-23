@@ -46,9 +46,6 @@ export default function CategoryTemplate({
     max: parseInt(searchParams.maxPrice || "") || 10000,
   })
   const [foundItemsCount, setFoundItemsCount] = useState<number>(0)
-  const [activeCategory, setActiveCategory] = useState<string | undefined>(
-    category.name
-  )
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query)
@@ -61,7 +58,6 @@ export default function CategoryTemplate({
   const resetFilters = () => {
     setSearchQuery("")
     setPriceRange({ min: 0, max: 10000 })
-    setActiveCategory(category.name)
   }
 
   const handleFoundItemsCountChange = (count: number) => {
@@ -73,8 +69,6 @@ export default function CategoryTemplate({
       <CategorySelector
         theme={themeColors}
         product_categories={product_categories}
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
         parentCategoryHandle={category.handle}
       />
       <TitleFilterSection
@@ -85,6 +79,7 @@ export default function CategoryTemplate({
         onPriceRangeChange={handlePriceRangeChange}
         onResetFilters={resetFilters}
         foundItemsCount={foundItemsCount}
+        category={category}
       />
       <ProductListSection
         theme={themeColors}

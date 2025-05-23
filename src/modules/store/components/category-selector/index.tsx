@@ -15,16 +15,12 @@ interface CategorySelectorProps {
     borderColor: string
   }
   product_categories: HttpTypes.StoreProductCategory[]
-  activeCategory?: string
-  onCategoryChange: (category: string | undefined) => void
   parentCategoryHandle?: string
 }
 
 const CategorySelector = ({
   theme,
   product_categories,
-  activeCategory,
-  onCategoryChange,
   parentCategoryHandle,
 }: CategorySelectorProps) => {
   const t = useTranslations().product.categories
@@ -36,7 +32,7 @@ const CategorySelector = ({
 
   const locale = useLocale()
 
-  // Функція для отримання локалізованої назви категорії
+  // Function to get localized category name
   const getCategoryName = (
     category: HttpTypes.StoreProductCategory | { name: string; handle: string }
   ): string => {
@@ -50,23 +46,19 @@ const CategorySelector = ({
     return category.name
   }
 
-  // Функція для створення query string
+  // Function to create query string
   const createQueryString = (name: string, value: string) => {
     const params = new URLSearchParams(searchParams)
     params.set(name, value)
     return params.toString()
   }
 
-  // Обробка кліку по категорії
-  const handleCategoryClick = (
-    categoryHandle: string,
-    categoryName: string
-  ) => {
-    onCategoryChange(categoryName)
+  // Handle category click
+  const handleCategoryClick = (categoryHandle: string) => {
     router.push(`${pathname}?${createQueryString("category", categoryHandle)}`)
   }
 
-  // Функції для прокручування
+  // Scroll functions
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" })
@@ -79,26 +71,57 @@ const CategorySelector = ({
     }
   }
 
-  const subcategories = parentCategoryHandle
-    ? product_categories.filter((category) =>
-        category.handle.startsWith(`${parentCategoryHandle}/`)
-      )
-    : product_categories.filter(
+  // Determine categories to display
+  let displayCategories: Array<
+    HttpTypes.StoreProductCategory | { name: string; handle: string }
+  > = []
+
+  // Extract parent category handle
+  const parentHandle = parentCategoryHandle
+    ? parentCategoryHandle.includes("/")
+      ? parentCategoryHandle.split("/")[0] // Get top-level parent (e.g., "home" from "home/presents")
+      : parentCategoryHandle
+    : null
+
+  if (parentHandle) {
+    // Check if the parent category has subcategories
+    const subcategories = product_categories.filter((category) =>
+      category.handle.startsWith(`${parentHandle}/`)
+    )
+
+    if (subcategories.length > 0) {
+      // If subcategories exist, display them
+      displayCategories = subcategories
+    } else {
+      // If no subcategories, display all top-level categories
+      displayCategories = product_categories.filter(
         (category) =>
           !category.handle.includes("/") && category.parent_category_id === null
       )
+    }
+  } else {
+    // If no parentHandle, display top-level categories
+    displayCategories = product_categories.filter(
+      (category) =>
+        !category.handle.includes("/") && category.parent_category_id === null
+    )
+  }
 
-  const displayCategories =
-    subcategories.length > 0
-      ? subcategories
-      : [
-          { name: t.firstItem, handle: "category1" },
-          { name: t.secondItem, handle: "category2" },
-          { name: t.thirdItem, handle: "category3" },
-          { name: t.fourthItem, handle: "category4" },
-          { name: t.fifthItem, handle: "category5" },
-          { name: t.sixthItem, handle: "category6" },
-        ]
+  // Fallback to default categories if none are available
+  if (displayCategories.length === 0) {
+    displayCategories = [
+      { name: t.firstItem, handle: "category1" },
+      { name: t.secondItem, handle: "category2" },
+      { name: t.thirdItem, handle: "category3" },
+      { name: t.fourthItem, handle: "category4" },
+      { name: t.fifthItem, handle: "category5" },
+      { name: t.sixthItem, handle: "category6" },
+    ]
+  }
+
+  // Determine the active category handle for highlighting
+  const activeCategoryHandle =
+    parentCategoryHandle || searchParams.get("category") || ""
 
   useEffect(() => {
     const checkScroll = () => {
@@ -119,7 +142,7 @@ const CategorySelector = ({
       className={`flex flex-col items-center ${theme.bgColor} px-[16px] py-[24px] lg:pt-[80px]`}
     >
       <div className="relative w-[328px] lg:w-[1408px]">
-        {/* Кнопка ← */}
+        {/* Left Arrow Button */}
         {showScrollButtons && (
           <button
             type="button"
@@ -130,13 +153,13 @@ const CategorySelector = ({
           </button>
         )}
         <div
-          className={`relative w-[328px] lg:w-[1408px]  py-[20px] border ${
+          className={`relative w-[328px] lg:w-[1408px] py-[20px] border ${
             theme.borderColor
           } rounded-[24px] bg-[#ffffff] ${
             showScrollButtons ? "px-[60px]" : "px-[20px]"
           }`}
         >
-          {/* Смуга з категоріями */}
+          {/* Category Strip */}
           <div
             ref={scrollContainerRef}
             className={`flex flex-nowrap items-center justify-center overflow-x-auto scrollbar-hide gap-[12px]`}
@@ -146,16 +169,11 @@ const CategorySelector = ({
               <LocalizedClientLink
                 key={idx}
                 href={`/categories/${category.handle}`}
-                onClick={() =>
-                  handleCategoryClick(
-                    category.handle,
-                    getCategoryName(category)
-                  )
-                }
+                onClick={() => handleCategoryClick(category.handle)}
                 className={`flex-shrink-0 min-w-[142px] h-[56px] text-[14px] rounded-xl cursor-pointer border ${
                   theme.borderColor
                 } ${
-                  activeCategory === getCategoryName(category)
+                  activeCategoryHandle === category.handle
                     ? `${theme.btnBgColor} text-white border-[${theme.mainColor}]`
                     : `${theme.borderColor} text-black`
                 } text-center overflow-hidden text-ellipsis whitespace-nowrap px-[8px] flex items-center justify-center`}
@@ -166,7 +184,7 @@ const CategorySelector = ({
             ))}
           </div>
         </div>
-        {/* Кнопка → */}
+        {/* Right Arrow Button */}
         {showScrollButtons && (
           <button
             type="button"
