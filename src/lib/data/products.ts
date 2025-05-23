@@ -177,8 +177,6 @@ export const listProductsWithSort = async ({
     query.q = searchQuery
   }
 
-  console.log("Fetching products with query:", query)
-
   const { products, count } = await sdk.client.fetch<{
     products: HttpTypes.StoreProduct[]
     count: number
@@ -189,8 +187,6 @@ export const listProductsWithSort = async ({
     next,
     cache: "no-store",
   })
-
-  console.log("Fetched products:", products.length, "Count:", count)
 
   // Client-side filtering for additional criteria
   let filteredProducts = products
@@ -214,8 +210,6 @@ export const listProductsWithSort = async ({
     })
   }
 
-  console.log("Filtered products:", filteredProducts.length)
-
   const nextPage = count > (page - 1) * limit + limit ? page + 1 : null
 
   // Sorting on client-side
@@ -233,8 +227,6 @@ export const listProductsWithSort = async ({
 
   // Limit products to page size
   const paginatedProducts = sortedProducts.slice(0, limit)
-
-  console.log("Paginated products:", paginatedProducts.length)
 
   return {
     response: {

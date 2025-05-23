@@ -170,13 +170,13 @@ const CategorySelector = ({
                 key={idx}
                 href={`/categories/${category.handle}`}
                 onClick={() => handleCategoryClick(category.handle)}
-                className={`flex-shrink-0 min-w-[142px] h-[56px] text-[14px] rounded-xl cursor-pointer border ${
-                  theme.borderColor
-                } ${
+                className={`flex-shrink-0 min-w-[142px] h-[56px] rounded-xl cursor-pointer border px-[8px] flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap text-center
+         font-normal text-[18px] leading-normal font-poppins text-[#444]
+         ${theme.borderColor} ${
                   activeCategoryHandle === category.handle
                     ? `${theme.btnBgColor} text-white border-[${theme.mainColor}]`
-                    : `${theme.borderColor} text-black`
-                } text-center overflow-hidden text-ellipsis whitespace-nowrap px-[8px] flex items-center justify-center`}
+                    : `text-[#444] ${theme.borderColor}`
+                }`}
                 title={getCategoryName(category)}
               >
                 {getCategoryName(category)}

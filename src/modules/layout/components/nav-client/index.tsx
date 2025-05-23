@@ -23,8 +23,6 @@ export default function NavClient({
 
   const t = useTranslations().header
 
-  console.log("categories", categories)
-
   return (
     <div className="sticky top-0 inset-x-0 z-50">
       <header className="bg-lighter-blue relative">
