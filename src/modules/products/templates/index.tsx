@@ -53,7 +53,6 @@ export default async function ProductTemplate({
         theme={themeColors}
         product={product}
       />
-      <SalesHitsSection theme={themeColors} products={products} />
     </main>
   )
 }

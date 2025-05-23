@@ -17,6 +17,7 @@ interface CategorySelectorProps {
   product_categories: HttpTypes.StoreProductCategory[]
   activeCategory?: string
   onCategoryChange: (category: string | undefined) => void
+  parentCategoryHandle?: string
 }
 
 const CategorySelector = ({
@@ -24,6 +25,7 @@ const CategorySelector = ({
   product_categories,
   activeCategory,
   onCategoryChange,
+  parentCategoryHandle,
 }: CategorySelectorProps) => {
   const t = useTranslations().product.categories
   const router = useRouter()
@@ -77,16 +79,18 @@ const CategorySelector = ({
     }
   }
 
-  // Фільтрація категорій верхнього рівня
-  const topLevelCategories = product_categories.filter(
-    (category) =>
-      !category.handle.includes("/") && category.parent_category_id === null
-  )
+  const subcategories = parentCategoryHandle
+    ? product_categories.filter((category) =>
+        category.handle.startsWith(`${parentCategoryHandle}/`)
+      )
+    : product_categories.filter(
+        (category) =>
+          !category.handle.includes("/") && category.parent_category_id === null
+      )
 
-  // Список категорій для відображення
   const displayCategories =
-    topLevelCategories.length > 0
-      ? topLevelCategories
+    subcategories.length > 0
+      ? subcategories
       : [
           { name: t.firstItem, handle: "category1" },
           { name: t.secondItem, handle: "category2" },
@@ -96,7 +100,6 @@ const CategorySelector = ({
           { name: t.sixthItem, handle: "category6" },
         ]
 
-  // Перевірка необхідності кнопок прокручування
   useEffect(() => {
     const checkScroll = () => {
       if (scrollContainerRef.current) {
@@ -105,8 +108,8 @@ const CategorySelector = ({
       }
     }
 
-    checkScroll() // Перевірка при завантаженні
-    window.addEventListener("resize", checkScroll) // Перевірка при зміні розміру вікна
+    checkScroll()
+    window.addEventListener("resize", checkScroll)
 
     return () => window.removeEventListener("resize", checkScroll)
   }, [displayCategories])

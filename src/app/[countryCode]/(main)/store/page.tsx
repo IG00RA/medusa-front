@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import StoreTemplate from "@modules/store/templates"
 import {
   ExtendedStoreProductParams,
+  listProducts,
   listProductsWithSort,
   SortOptions,
 } from "@lib/data/products"
@@ -49,6 +50,8 @@ export default async function StorePage(props: Params) {
     tags = [sortBy]
   }
 
+  const allProducts = await listProducts({ countryCode })
+
   const {
     response: { products, count },
   } = await listProductsWithSort({
@@ -65,6 +68,7 @@ export default async function StorePage(props: Params) {
 
   return (
     <StoreTemplate
+      allProducts={allProducts.response.products}
       searchParams={searchParams}
       product_categories={product_categories || []}
       products={products}

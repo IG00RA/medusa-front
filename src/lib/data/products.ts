@@ -6,6 +6,7 @@ import { HttpTypes } from "@medusajs/types"
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { getRegion, retrieveRegion } from "./regions"
 import { getProductPrice } from "../util/get-product-price"
+import { listCategories } from "./categories"
 
 export type SortOptions =
   | "created_at"
@@ -18,6 +19,7 @@ export type SortOptions =
 export interface ExtendedStoreProductParams
   extends HttpTypes.FindParams,
     HttpTypes.StoreProductParams {
+  category_id?: string[]
   q?: string
 }
 
@@ -129,6 +131,7 @@ export const listProductsWithSort = async ({
 
   const region = await getRegion(countryCode)
   if (!region) {
+    console.log("No region found for countryCode:", countryCode)
     return {
       response: { products: [], count: 0 },
       nextPage: null,
@@ -144,6 +147,17 @@ export const listProductsWithSort = async ({
     ...(await getCacheOptions("products")),
   }
 
+  // Fetch all categories to get subcategory IDs
+  const product_categories = await listCategories()
+  const categoryIds = category
+    ? product_categories
+        .filter(
+          (cat) =>
+            cat.handle === category || cat.handle.startsWith(`${category}/`)
+        )
+        .map((cat) => cat.id)
+    : []
+
   const query: ExtendedStoreProductParams = {
     limit,
     offset: (page - 1) * limit,
@@ -153,10 +167,17 @@ export const listProductsWithSort = async ({
     ...queryParams,
   }
 
-  // Додавання пошуку за назвою
+  // Add category filter to server-side query
+  if (categoryIds.length > 0) {
+    query.category_id = categoryIds
+  }
+
+  // Add search query
   if (searchQuery) {
     query.q = searchQuery
   }
+
+  console.log("Fetching products with query:", query)
 
   const { products, count } = await sdk.client.fetch<{
     products: HttpTypes.StoreProduct[]
@@ -169,24 +190,19 @@ export const listProductsWithSort = async ({
     cache: "no-store",
   })
 
-  // Клієнтська фільтрація
+  console.log("Fetched products:", products.length, "Count:", count)
+
+  // Client-side filtering for additional criteria
   let filteredProducts = products
 
-  // Фільтрація за тегами
+  // Filter by tags
   if (tags && tags.length > 0) {
     filteredProducts = filteredProducts.filter((product) =>
       product.tags?.some((tag) => tags.includes(tag.value))
     )
   }
 
-  // Фільтрація за категорією
-  if (category) {
-    filteredProducts = filteredProducts.filter((product) =>
-      product.categories?.some((cat) => cat.handle === category)
-    )
-  }
-
-  // Фільтрація за ціною
+  // Filter by price
   if (minPrice !== undefined || maxPrice !== undefined) {
     filteredProducts = filteredProducts.filter((product) => {
       const { cheapestPrice } = getProductPrice({ product })
@@ -198,9 +214,11 @@ export const listProductsWithSort = async ({
     })
   }
 
+  console.log("Filtered products:", filteredProducts.length)
+
   const nextPage = count > (page - 1) * limit + limit ? page + 1 : null
 
-  // Сортування на клієнтській стороні
+  // Sorting on client-side
   let sortedProducts = filteredProducts
   if (
     sortBy === "popular" ||
@@ -213,8 +231,10 @@ export const listProductsWithSort = async ({
     sortedProducts = sortProducts(filteredProducts, sortBy)
   }
 
-  // Обмеження кількості товарів на сторінці
+  // Limit products to page size
   const paginatedProducts = sortedProducts.slice(0, limit)
+
+  console.log("Paginated products:", paginatedProducts.length)
 
   return {
     response: {

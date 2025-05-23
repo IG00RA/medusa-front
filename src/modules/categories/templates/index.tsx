@@ -1,97 +1,100 @@
-import { notFound } from "next/navigation"
-import { Suspense } from "react"
+"use client"
 
-import InteractiveLink from "@modules/common/components/interactive-link"
-import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
-import RefinementList from "@modules/store/components/refinement-list"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import PaginatedProducts from "@modules/store/templates/paginated-products"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useState } from "react"
 import { HttpTypes } from "@medusajs/types"
+import { SortOptions } from "@lib/data/products"
+import CategorySelector from "@modules/store/components/category-selector"
+import TitleFilterSection from "@modules/store/components/title-filter-section"
+import ProductListSection from "@modules/store/components/product-list-section"
 
 export default function CategoryTemplate({
+  searchParams,
+  products,
+  count,
+  regionData,
+  product_categories,
+  allProducts,
   category,
-  sortBy,
-  page,
-  countryCode,
 }: {
+  product_categories: HttpTypes.StoreProductCategory[]
+  products: HttpTypes.StoreProduct[]
+  allProducts: HttpTypes.StoreProduct[]
+  count: number
+  regionData: HttpTypes.StoreRegion | undefined | null
+  searchParams: {
+    sortBy?: SortOptions
+    page?: string
+    minPrice?: string
+    maxPrice?: string
+    query?: string
+  }
   category: HttpTypes.StoreProductCategory
-  sortBy?: SortOptions
-  page?: string
-  countryCode: string
 }) {
-  const pageNumber = page ? parseInt(page) : 1
-  const sort = sortBy || "created_at"
-
-  if (!category || !countryCode) notFound()
-
-  const parents = [] as HttpTypes.StoreProductCategory[]
-
-  const getParents = (category: HttpTypes.StoreProductCategory) => {
-    if (category.parent_category) {
-      parents.push(category.parent_category)
-      getParents(category.parent_category)
-    }
+  const themeColors = {
+    mainColor: "#f0ad4e",
+    textColor: "text-[#f0ad4e]",
+    bgColor: "bg-[#fff9f0]",
+    btnBgColor: "bg-[#f0ad4e]",
+    borderColor: "border-[#f0ad4e]",
   }
 
-  getParents(category)
+  const [searchQuery, setSearchQuery] = useState<string>(
+    searchParams.query || ""
+  )
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({
+    min: parseInt(searchParams.minPrice || "") || 0,
+    max: parseInt(searchParams.maxPrice || "") || 10000,
+  })
+  const [foundItemsCount, setFoundItemsCount] = useState<number>(0)
+  const [activeCategory, setActiveCategory] = useState<string | undefined>(
+    category.name
+  )
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query)
+  }
+
+  const handlePriceRangeChange = (min: number, max: number) => {
+    setPriceRange({ min, max })
+  }
+
+  const resetFilters = () => {
+    setSearchQuery("")
+    setPriceRange({ min: 0, max: 10000 })
+    setActiveCategory(category.name)
+  }
+
+  const handleFoundItemsCountChange = (count: number) => {
+    setFoundItemsCount(count)
+  }
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
-      <RefinementList sortBy={sort} data-testid="sort-by-container" />
-      <div className="w-full">
-        <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-          {parents &&
-            parents.map((parent) => (
-              <span key={parent.id} className="text-ui-fg-subtle">
-                <LocalizedClientLink
-                  className="mr-4 hover:text-black"
-                  href={`/categories/${parent.handle}`}
-                  data-testid="sort-by-link"
-                >
-                  {parent.name}
-                </LocalizedClientLink>
-                /
-              </span>
-            ))}
-          <h1 data-testid="category-page-title">{category.name}</h1>
-        </div>
-        {category.description && (
-          <div className="mb-8 text-base-regular">
-            <p>{category.description}</p>
-          </div>
-        )}
-        {category.category_children && (
-          <div className="mb-8 text-base-large">
-            <ul className="grid grid-cols-1 gap-2">
-              {category.category_children?.map((c) => (
-                <li key={c.id}>
-                  <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.name}
-                  </InteractiveLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        <Suspense
-          fallback={
-            <SkeletonProductGrid
-              numberOfProducts={category.products?.length ?? 8}
-            />
-          }
-        >
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            categoryId={category.id}
-            countryCode={countryCode}
-          />
-        </Suspense>
-      </div>
-    </div>
+    <main>
+      <CategorySelector
+        theme={themeColors}
+        product_categories={product_categories}
+        activeCategory={activeCategory}
+        onCategoryChange={setActiveCategory}
+        parentCategoryHandle={category.handle}
+      />
+      <TitleFilterSection
+        theme={themeColors}
+        searchQuery={searchQuery}
+        onSearchChange={handleSearchChange}
+        priceRange={priceRange}
+        onPriceRangeChange={handlePriceRangeChange}
+        onResetFilters={resetFilters}
+        foundItemsCount={foundItemsCount}
+      />
+      <ProductListSection
+        theme={themeColors}
+        allProducts={allProducts}
+        regionData={regionData}
+        onFoundItemsCountChange={handleFoundItemsCountChange}
+        page={searchParams.page ? parseInt(searchParams.page) : 1}
+        products={products}
+        count={count}
+      />
+    </main>
   )
 }

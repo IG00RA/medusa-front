@@ -21,6 +21,7 @@ interface ProductListSectionProps {
   page: number
   regionData: HttpTypes.StoreRegion | undefined | null
   products: HttpTypes.StoreProduct[]
+  allProducts: HttpTypes.StoreProduct[]
   count: number
 }
 
@@ -32,6 +33,7 @@ const ProductListSection = ({
   page,
   regionData,
   products,
+  allProducts,
   count,
 }: ProductListSectionProps) => {
   const t = useTranslations().moreThanPrint.salesHits
@@ -78,13 +80,11 @@ const ProductListSection = ({
     if (onFoundItemsCountChange) {
       onFoundItemsCountChange(count)
     }
-
     const viewed = JSON.parse(
       localStorage.getItem("recentlyViewed") || "[]"
     ) as string[]
-    const viewedProducts = products
-      .filter((p) => viewed.includes(p.id!))
-      .slice(0, 3)
+
+    const viewedProducts = allProducts.filter((p) => viewed.includes(p.id!))
     setRecentlyViewedItems(viewedProducts)
   }, [products, count, onFoundItemsCountChange, regionData])
 
@@ -214,12 +214,16 @@ const ProductListSection = ({
                         href={`/products/${item.handle}`}
                         onClick={() => handleViewProduct(item.id!)}
                       >
-                        <div className="min-w-[222px] min-h-[128px] bg-[#F0F0F0] rounded-[24px] flex items-center justify-center mb-3">
+                        <div className="min-w-[222px] h-[128px] bg-[#F0F0F0] rounded-[24px] flex items-center justify-center mb-3 overflow-hidden relative">
                           <Image
-                            src={item.thumbnail || "/placeholder.png"}
+                            src={
+                              item.thumbnail ||
+                              "/pages/moreThanPrintPage/gamePad.png"
+                            }
                             alt={item.title || ""}
-                            width={56}
-                            height={56}
+                            width={222}
+                            height={128}
+                            className="w-full h-full object-cover"
                           />
                         </div>
                         <div className="flex flex-col items-center flex-grow">

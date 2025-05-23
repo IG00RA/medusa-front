@@ -9,6 +9,8 @@ import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-price-nudge"
 import Newsletter from "@/modules/layout/components/newsletter"
+import SalesHitsSection from "@/modules/products/templates/sales-hits-section"
+import { listProducts } from "@/lib/data/products"
 
 export const metadata: Metadata = {
   title: "Flexifun HUB Store",
@@ -18,8 +20,24 @@ export const metadata: Metadata = {
 //   metadataBase: new URL(getBaseURL()),
 // }
 
-export default async function PageLayout(props: { children: React.ReactNode }) {
+type Props = {
+  params: Promise<{ category: string[]; countryCode: string }>
+  children: React.ReactNode
+}
+
+export default async function PageLayout(props: Props) {
+  const themeColors = {
+    mainColor: "#f0ad4e",
+    textColor: "text-[#f0ad4e]",
+    bgColor: "bg-[#fff9f0]",
+    btnBgColor: "bg-[#f0ad4e]",
+    borderColor: "border-[#f0ad4e]",
+  }
+  const params = await props.params
+  const { countryCode } = params
   const customer = await retrieveCustomer()
+  const products = await listProducts({ countryCode })
+
   const cart = await retrieveCart()
   let shippingOptions: StoreCartShippingOption[] = []
 
@@ -44,6 +62,10 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
         />
       )}
       {props.children}
+      <SalesHitsSection
+        theme={themeColors}
+        products={products.response.products}
+      />
       <Newsletter />
       <Footer />
     </>
