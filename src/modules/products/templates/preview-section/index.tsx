@@ -316,7 +316,11 @@ const PreviewSection = ({
             <div
               className={`${theme.textColor} font-bold text-[32px] mb-[16px]`}
             >
-              <ProductPrice product={product} variant={selectedVariant} />
+              <ProductPrice
+                isMain={true}
+                product={product}
+                variant={selectedVariant}
+              />
             </div>
             <p className="text-[14px] text-[#555555] lg:text-[16px]">
               {product.subtitle || t.description}

@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Metadata } from "next"
-import { useTranslations } from "@/lib/localization"
 import CategorySelector from "../components/category-selector"
 import TitleFilterSection from "../components/title-filter-section"
 import ProductListSection from "../components/product-list-section"
@@ -11,7 +10,7 @@ import { HttpTypes } from "@medusajs/types"
 import { SortOptions } from "@/lib/data/products"
 
 export const metadata: Metadata = {
-  title: "Store",
+  title: "FlexiHub Store",
   description: "Explore all of our products.",
 }
 
@@ -36,7 +35,6 @@ export default function StoreTemplate({
     filter?: string
   }
 }) {
-  const t = useTranslations().product
   const themeColors = {
     mainColor: "#f0ad4e",
     textColor: "text-[#f0ad4e]",
@@ -45,11 +43,9 @@ export default function StoreTemplate({
     borderColor: "border-[#f0ad4e]",
   }
 
-  const title = t.filtersSection.title || "Декор та подарунки"
   const [searchQuery, setSearchQuery] = useState<string>(
     searchParams.query || ""
   )
-  const [activeFilter, setActiveFilter] = useState<number>(0)
   const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({
     min: parseInt(searchParams.minPrice || "") || 0,
     max: parseInt(searchParams.maxPrice || "") || 10000,
@@ -63,17 +59,12 @@ export default function StoreTemplate({
     setSearchQuery(query)
   }
 
-  const handleFilterChange = (index: number) => {
-    setActiveFilter(index)
-  }
-
   const handlePriceRangeChange = (min: number, max: number) => {
     setPriceRange({ min, max })
   }
 
   const resetFilters = () => {
     setSearchQuery("")
-    setActiveFilter(0)
     setPriceRange({ min: 0, max: 10000 })
     setActiveCategory(undefined)
   }
@@ -94,8 +85,6 @@ export default function StoreTemplate({
         theme={themeColors}
         searchQuery={searchQuery}
         onSearchChange={handleSearchChange}
-        activeFilter={activeFilter}
-        onFilterChange={handleFilterChange}
         priceRange={priceRange}
         onPriceRangeChange={handlePriceRangeChange}
         onResetFilters={resetFilters}
@@ -103,10 +92,7 @@ export default function StoreTemplate({
       />
       <ProductListSection
         theme={themeColors}
-        searchQuery={searchQuery}
         regionData={regionData}
-        activeFilter={activeFilter}
-        priceRange={priceRange}
         onFoundItemsCountChange={handleFoundItemsCountChange}
         page={searchParams.page ? parseInt(searchParams.page) : 1}
         products={products}

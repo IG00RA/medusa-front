@@ -17,8 +17,6 @@ interface TitleFilterSectionProps {
   }
   searchQuery: string
   onSearchChange: (query: string) => void
-  activeFilter: number
-  onFilterChange: (index: number) => void
   priceRange: { min: number; max: number }
   onPriceRangeChange: (min: number, max: number) => void
   onResetFilters: () => void
@@ -29,8 +27,6 @@ const TitleFilterSection = ({
   theme,
   searchQuery: initialSearchQuery,
   onSearchChange,
-  activeFilter,
-  onFilterChange,
   priceRange,
   onPriceRangeChange,
   onResetFilters,
@@ -103,7 +99,6 @@ const TitleFilterSection = ({
   }
 
   const handleFilter = (index: number) => {
-    onFilterChange(index)
     const sortValue = filters[index].value
     router.push(`${pathname}?${createQueryString({ sortBy: sortValue })}`)
   }

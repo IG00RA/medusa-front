@@ -7,9 +7,11 @@ import { useTranslations } from "@/lib/localization"
 export default function ProductPrice({
   product,
   variant,
+  isMain = false,
 }: {
   product: HttpTypes.StoreProduct
   variant?: HttpTypes.StoreProductVariant
+  isMain?: boolean
 }) {
   const { cheapestPrice, variantPrice } = getProductPrice({
     product,
@@ -33,7 +35,9 @@ export default function ProductPrice({
       >
         {/* {!variant && "From "} */}
         <span
-          className="text-[var(--color-dark-blue)] text-[#f0ad4e] font-bold text-[32px] mb-[16px]"
+          className={`${
+            !isMain ? "text-[var(--color-dark-blue)]" : "text-[#f0ad4e]"
+          } font-bold text-[32px] mb-[16px]`}
           data-testid="product-price"
           data-value={selectedPrice.calculated_price_number}
         >

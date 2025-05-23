@@ -9,7 +9,7 @@ import { listCategories } from "@lib/data/categories"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Store",
+  title: "FlexiHub Store",
   description: "Explore all of our products.",
 }
 

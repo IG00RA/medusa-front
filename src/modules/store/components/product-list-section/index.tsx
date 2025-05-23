@@ -17,9 +17,6 @@ interface ProductListSectionProps {
     btnBgColor: string
     borderColor: string
   }
-  searchQuery: string
-  activeFilter: number
-  priceRange: { min: number; max: number }
   onFoundItemsCountChange?: (count: number) => void
   page: number
   regionData: HttpTypes.StoreRegion | undefined | null
@@ -31,9 +28,6 @@ const PRODUCT_LIMIT = 12
 
 const ProductListSection = ({
   theme,
-  searchQuery,
-  activeFilter,
-  priceRange,
   onFoundItemsCountChange,
   page,
   regionData,

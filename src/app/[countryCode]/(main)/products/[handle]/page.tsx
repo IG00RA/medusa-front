@@ -1,11 +1,8 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { sdk } from "@lib/config"
-import { getRegion } from "@lib/data/regions"
-import { listRegions } from "@lib/data/regions"
 import { listProducts } from "@lib/data/products"
+import { getRegion, listRegions } from "@lib/data/regions"
 import ProductTemplate from "@modules/products/templates"
-import { HttpTypes } from "@medusajs/types"
 
 type Props = {
   params: Promise<{ countryCode: string; handle: string }>
@@ -55,105 +52,55 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const { handle, countryCode } = params
-  const region = await getRegion(countryCode)
+  const { handle } = params
+  const region = await getRegion(params.countryCode)
 
   if (!region) {
     notFound()
   }
 
-  // Fetch product by handle with detailed error logging
-  try {
-    const { product } = await sdk.client.fetch<{
-      product: HttpTypes.StoreProduct
-    }>(`/store/products/${handle}`, {
-      query: {
-        region_id: region.id,
-        fields: "id,title,handle,thumbnail,description",
-      },
-      headers: {
-        "x-publishable-key":
-          process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "",
-      },
-      cache: "no-store",
-    })
+  const product = await listProducts({
+    countryCode: params.countryCode,
+    queryParams: { handle },
+  }).then(({ response }) => response.products[0])
 
-    if (!product) {
-      console.log(
-        `Product not found for handle: ${handle}, region: ${region.id}`
-      )
-      notFound()
-    }
-
-    return {
-      title: `${product.title} | Medusa Store`,
-      description: `${product.title}`,
-      openGraph: {
-        title: `${product.title} | Medusa Store`,
-        description: `${product.title}`,
-        images: product.thumbnail ? [product.thumbnail] : [],
-      },
-    }
-  } catch (error) {
-    console.error(
-      `Failed to fetch product for handle: ${handle}, region: ${
-        region.id
-      }, error: ${error instanceof Error ? error.message : "Unknown error"}`
-    )
+  if (!product) {
     notFound()
+  }
+
+  return {
+    title: `${product.title} | FlexiHub Store`,
+    description: `${product.title}`,
+    openGraph: {
+      title: `${product.title} | FlexiHub Store`,
+      description: `${product.title}`,
+      images: product.thumbnail ? [product.thumbnail] : [],
+    },
   }
 }
 
 export default async function ProductPage(props: Props) {
   const params = await props.params
-  const { countryCode, handle } = params
-  const region = await getRegion(countryCode)
-  console.log(
-    `Fetching product - handle: ${handle}, countryCode: ${countryCode}, regionId: ${region?.id}`
-  )
+  const region = await getRegion(params.countryCode)
 
   if (!region) {
-    console.log(`Region not found for countryCode: ${countryCode}`)
     notFound()
   }
 
-  try {
-    const { product: pricedProduct } = await sdk.client.fetch<{
-      product: HttpTypes.StoreProduct
-    }>(`/store/products/${handle}`, {
-      query: {
-        region_id: region.id,
-        fields:
-          "id,title,handle,thumbnail,description,*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags",
-      },
-      headers: {
-        "x-publishable-key":
-          process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "",
-      },
-      cache: "no-store",
-    })
+  const pricedProduct = await listProducts({
+    countryCode: params.countryCode,
+    queryParams: { handle: params.handle },
+  }).then(({ response }) => response.products[0])
 
-    if (!pricedProduct) {
-      console.log(
-        `Product not found for handle: ${handle}, region: ${region.id}`
-      )
-      notFound()
-    }
-
-    console.log(`Product fetched successfully: ${pricedProduct.title}`)
-    return (
-      <ProductTemplate
-        product={pricedProduct}
-        region={region}
-        countryCode={countryCode}
-      />
-    )
-  } catch (error) {
-    console.error(
-      `Failed to fetch product for handle: ${handle}, region: ${
-        region.id
-      }, error: ${error instanceof Error ? error.message : "Unknown error"}`
-    )
+  if (!pricedProduct) {
     notFound()
   }
+
+  return (
+    <ProductTemplate
+      product={pricedProduct}
+      region={region}
+      countryCode={params.countryCode}
+    />
+  )
 }
