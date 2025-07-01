@@ -288,14 +288,7 @@ const DescriptionSection = ({
                   <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
                 </div>
               )}
-              {isContentLoaded && (
-                <button
-                  onClick={closeModal}
-                  className="absolute top-4 right-4 text-white text-2xl font-bold p-1 pl-2 pr-2 rounded-full border border-white bg-zinc-600"
-                >
-                  ×
-                </button>
-              )}
+
               {isVideoModal && product.mid_code ? (
                 <iframe
                   width="800"
@@ -319,6 +312,14 @@ const DescriptionSection = ({
                     onLoad={handleContentLoad}
                   />
                 )
+              )}
+              {isContentLoaded && (
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="absolute top-[-22] right-[-16] text-white text-2xl font-bold p-0.5 px-3 rounded-full border border-white bg-zinc-600 z-2 pointer-events-auto"
+                >
+                  ×
+                </button>
               )}
             </div>
           </div>

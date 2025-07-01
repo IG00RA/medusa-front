@@ -9,7 +9,7 @@ export default function CheckoutLayout({
 }) {
   return (
     <div className="w-full bg-white relative small:min-h-screen">
-      <div className="h-16 bg-white border-b ">
+      {/* <div className="h-16 bg-white border-b ">
         <nav className="flex h-full items-center content-container justify-between">
           <LocalizedClientLink
             href="/cart"
@@ -33,10 +33,9 @@ export default function CheckoutLayout({
           </LocalizedClientLink>
           <div className="flex-1 basis-0" />
         </nav>
-      </div>
-      <div className="relative" data-testid="checkout-container">{children}</div>
-      <div className="py-4 w-full flex items-center justify-center">
-        <MedusaCTA />
+      </div> */}
+      <div className="relative" data-testid="checkout-container">
+        {children}
       </div>
     </div>
   )

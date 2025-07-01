@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "@/lib/localization"
 import { PrimaryButton, SecondaryButton } from "../buttons"
-import { useRouter } from "next/navigation" // імпорт useRouter
+import { useRouter } from "next/navigation"
 
 export default function MoreThanPrintText() {
   const t = useTranslations().moreThanPrint.hero

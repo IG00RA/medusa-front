@@ -32,6 +32,8 @@ const Payment = ({
     activeSession?.provider_id ?? ""
   )
 
+  console.log("selectedPaymentMethod", selectedPaymentMethod)
+
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()

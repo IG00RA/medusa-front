@@ -123,7 +123,6 @@ export async function addToCart({
   if (!variantId) {
     throw new Error("Missing variant ID when adding to cart")
   }
-
   const cart = await getOrSetCart(countryCode)
 
   if (!cart) {

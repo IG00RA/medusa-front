@@ -1,10 +1,12 @@
-"use client";
-import { useTranslations } from "@/lib/localization";
-import Image from "next/image";
-import { PrimaryButton } from "../buttons";
+"use client"
+
+import { useLocale, useTranslations } from "@/lib/localization"
+import Image from "next/image"
+import { PrimaryButton } from "../buttons"
+import { useRouter } from "next/navigation"
 
 const OurWareSection = () => {
-  const t = useTranslations().moreThanPrint.ourWare;
+  const t = useTranslations().moreThanPrint.ourWare
   const items = [
     {
       title: t.educationalSets.title,
@@ -13,6 +15,7 @@ const OurWareSection = () => {
       bgMain: "bg-[var(--color-lighter-blue)]",
       bgPic: "bg-[var(--color-light-blue)]",
       bgBtn: "bg-main-blue",
+      link: "games",
     },
     {
       title: t.playSets.title,
@@ -21,6 +24,7 @@ const OurWareSection = () => {
       bgMain: "bg-[var(--color-lighter-red)]",
       bgPic: "bg-[var(--color-light-red)]",
       bgBtn: "bg-main-red",
+      link: "games",
     },
     {
       title: t.decorSets.title,
@@ -29,6 +33,7 @@ const OurWareSection = () => {
       bgMain: "bg-[var(--color-lighter-orange)]",
       bgPic: "bg-[var(--color-light-orange)]",
       bgBtn: "bg-main-orange",
+      link: "decor",
     },
     {
       title: t.usefulSets.title,
@@ -37,8 +42,16 @@ const OurWareSection = () => {
       bgMain: "bg-[var(--color-lighter-green)]",
       bgPic: "bg-[var(--color-light-green)]",
       bgBtn: "bg-main-green",
+      link: "accessories",
     },
-  ];
+  ]
+
+  const router = useRouter()
+  const locale = useLocale()
+
+  const handlePrimaryClick = (link: string) => {
+    router.push(`/${locale}/categories/${link}`)
+  }
 
   return (
     <section className="py-[96px] px-[16px]">
@@ -69,6 +82,7 @@ const OurWareSection = () => {
                 {item.desc}
               </p>
               <PrimaryButton
+                onClick={() => handlePrimaryClick(item.link)}
                 text={t.ourWaresBtn}
                 styles={`px-[20px] py-[10px] rounded-full text-[18px] font-regular w-[185px] ${item.bgBtn}`}
               />
@@ -77,7 +91,7 @@ const OurWareSection = () => {
         ))}
       </ul>
     </section>
-  );
-};
+  )
+}
 
-export default OurWareSection;
+export default OurWareSection

@@ -17,6 +17,19 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
   const cartRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const t = useTranslations().header.cart
+  const [cartItems, setCartItems] = useState(cart?.items || [])
+
+  const totalPrice =
+    cartItems?.reduce(
+      (total, item) => total + (item.unit_price || 0) * (item.quantity || 0),
+      0
+    ) || 0
+
+  useEffect(() => {
+    if (cart?.items) {
+      setCartItems(cart.items)
+    }
+  }, [cart])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,6 +48,12 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
   const handleQuantityChange = async (itemId: string, quantity: number) => {
     if (quantity < 1 || !cart?.id) return
     setUpdating(itemId)
+
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? { ...item, quantity } : item
+      )
+    )
     try {
       await updateLineItem({
         lineId: itemId,
@@ -42,6 +61,11 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
       })
       router.refresh()
     } catch (error) {
+      setCartItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === itemId ? { ...item, quantity: item.quantity } : item
+        )
+      )
       console.error("Error updating quantity:", error)
     } finally {
       setUpdating(null)
@@ -68,8 +92,8 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
             {t.header} ({totalItems})
           </h2>
           <ul className="bg-white px-6 py-4 w-full flex flex-col gap-3">
-            {cart && cart.items?.length > 0 ? (
-              cart.items
+            {cartItems && cartItems.length > 0 ? (
+              cartItems
                 .sort((a, b) =>
                   (a.created_at ?? "") > (b.created_at ?? "") ? -1 : 1
                 )
@@ -98,8 +122,8 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
                         </p>
                         <p className="font-bold text-main-blue">
                           {convertToLocale({
-                            amount: item.unit_price * item.quantity,
-                            currency_code: cart.currency_code,
+                            amount: item.unit_price || 0,
+                            currency_code: cart?.currency_code || "ua",
                           })}
                         </p>
                       </div>
@@ -154,7 +178,7 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
               <p>{t.empty}</p>
             )}
           </ul>
-          {cart?.items?.length > 0 && (
+          {cart?.items && cart?.items?.length > 0 && (
             <>
               <hr className="border-neutral-300" />
               <div className="bg-white px-6 py-4 w-full rounded-b-2xl flex flex-col gap-3 text-md">
@@ -162,7 +186,7 @@ export default function Cart({ cart }: { cart: HttpTypes.StoreCart | null }) {
                   <p className="text-neutral-600">{t.total}:</p>
                   <span className="font-bold text-dark-blue text-2xl">
                     {convertToLocale({
-                      amount: subtotal,
+                      amount: totalPrice,
                       currency_code: cart.currency_code,
                     })}
                   </span>

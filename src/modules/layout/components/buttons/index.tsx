@@ -2,13 +2,16 @@ export function PrimaryButton({
   text,
   styles,
   onClick,
+  disabled = false,
 }: {
   text: string
   styles?: string
+  disabled?: boolean
   onClick?: () => void
 }) {
   return (
     <button
+      disabled={disabled}
       className={`bg-main-blue text-white rounded-xl px-6 py-3 cursor-pointer ${styles}`}
       onClick={onClick}
     >

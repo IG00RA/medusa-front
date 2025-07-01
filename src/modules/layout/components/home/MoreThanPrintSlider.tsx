@@ -9,7 +9,8 @@ import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
-import { useTranslations } from "@/lib/localization"
+import { useLocale, useTranslations } from "@/lib/localization"
+import LocalizedClientLink from "@/modules/common/components/localized-client-link"
 
 interface ArrowProps {
   onClick: () => void
@@ -52,31 +53,37 @@ const MoreThanPrintSlider = () => {
       title: t.sliderFirstItem,
       bgColor: "bg-[#DDE9FF]",
       textColor: "text-[var(--color-main-blue)]",
+      link: "games",
     },
     {
       title: t.sliderSecondItem,
       bgColor: "bg-[#FFEDED]",
       textColor: "text-[#F95F62]",
+      link: "games",
     },
     {
       title: t.sliderThirdItem,
       bgColor: "bg-[#FFF7E7]",
       textColor: "text-[#F5A623]",
+      link: "decor",
     },
     {
       title: t.sliderFirstItem,
       bgColor: "bg-[#DDE9FF]",
       textColor: "text-[var(--color-main-blue)]",
+      link: "games",
     },
     {
       title: t.sliderSecondItem,
       bgColor: "bg-[#FFEDED]",
       textColor: "text-[#F95F62]",
+      link: "games",
     },
     {
       title: t.sliderThirdItem,
       bgColor: "bg-[#FFF7E7]",
       textColor: "text-[#F5A623]",
+      link: "decor",
     },
   ]
 
@@ -131,7 +138,9 @@ const MoreThanPrintSlider = () => {
                 <div
                   className={`h-[280px] rounded-xl flex items-center justify-center text-center text-lg font-semibold px-[27px] ${item.bgColor} ${item.textColor}`}
                 >
-                  {item.title}
+                  <LocalizedClientLink href={`/categories/${item.link}`}>
+                    {item.title}
+                  </LocalizedClientLink>
                 </div>
               </div>
             </SwiperSlide>
